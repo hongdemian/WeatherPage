@@ -83,7 +83,7 @@ let getWeather = function () {
 };
 
 function showWeather(lat, long) {
-	var url = `https://api.darksky.net/forecast/f672ff13193bfcc40427a678ebfdbc71/${lat},${long}` + `?format=jsonp&callback=displayWeather`;
+	var url = `https://api.darksky.net/forecast/459d95a8fbfada306d82991efda5b383/${lat},${long}` + `?format=jsonp&callback=displayWeather`;
 	var script = document.createElement("script");
 	script.type = "text/javascript";
 	script.src = url;
