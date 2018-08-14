@@ -7,6 +7,9 @@ var temperatureIcon;
 var windBearing;
 var windSpeed;
 var weatherSummary;
+var alerts;
+var summary;
+var currentTime;
 
 window.onload = function() {
 	humidity = document.getElementById("current-humidity");
@@ -18,8 +21,20 @@ window.onload = function() {
 	windBearing = document.getElementById("current-wind-bearing");
 	windSpeed = document.getElementById("current-wind-speed");
 	weatherSummary = document.getElementById("weather-summary");
+	if (alerts) {
+		alerts = document.getElementById("alerts");
+	} else {
+		alerts = "No Alerts as of " + timeToStandard(object.hourly.data.time);
+	}
+	summary = document.getElementById("summary");
 }
 
+function timeToStandard(time) {
+	let forcastTime = (time*1000);
+	forcastHours = forcastTime.getHours();
+	forcastMinutes = forcastTime.getMinutes();
+	return (forcastHours + ":" + forcastMinutes);
+}
 function farenheitToCelsius(k) {
 	return Math.round((k - 32) * 0.5556 );
 }
@@ -105,5 +120,8 @@ function displayWeather(object) {
 	weatherSummary.innerHTML = "Current Location: " + object.timezone + " <br/> <br/> Weather Summary: " + object.currently.summary;
 	document.getElementById("current-icon").style.backgroundColor = "hsl(216, 100%, 60%)";
 	document.getElementById("weather-summary").style.backgroundColor = "hsl(216, 100%, 60%)";
+	alerts.innerHTML = "Alerts: " + object.alerts.title;
+	summary.innerHTML = object.hourly.summary;
+
 	console.log(object);
 }

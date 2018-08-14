@@ -95,4 +95,28 @@ a {
     padding: 10px;
     line-height: 18px;
     opacity: 0.8;
+    background-color: hsl(216,100%,90%);
+}
+.extras {
+    margin: auto;
+    max-width: 40%;
+    background-color: cadetblue;
+    height: auto;
+}
+#alerts{
+    width: 400px;
+    height: 50px;
+    margin-left: 35%;
+    margin-top: 2%;
+    border-radius: 10px;
+    font-family: 'Fresca', sans-serif;
+    font-size: 20px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    line-height: 18px;
+    opacity: 0.8;
+    background-color: hsl(216, 100%, 90%);
 }
