@@ -10,6 +10,9 @@
 </head>
 <body>
 <img id="current-icon">
+<div id="alerts">
+    <a href=$alertUrl>No alerts in forecast！</a>
+</div>
 <div id="current-weather-details">
     <a id="current-humidity">--</a>
     <a id="current-pressure">--</a>
@@ -18,15 +21,12 @@
     <a id="current-temperature">--</a>
     <a id="current-wind-bearing">--</a>
     <a id="current-wind-speed">--</a>
+    <a id="current-cloud-cover">--</a>
+    <a id="current-wind-gust">--</a>
     <button id="getWeather" onclick="getWeather()">Get Current Weather!</button>
-
-
 </div>
-
-<p id="weather-summary"></p>
-<div class="extras">
-    <p id="alerts">No Alerts now</p>
-    <p id="summary"> Summary</p>
+<div id="weather-summary">
+    <a id="weatherSummary"></a>
 </div>
 </body>
 
