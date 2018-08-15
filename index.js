@@ -152,7 +152,7 @@ function displayWeather(object) {
 	document.getElementById("current-icon").style.backgroundColor = "hsl(216, 100%, 60%)";
 	document.getElementById("weather-summary").style.backgroundColor = "hsl(216, 100%, 60%)";
 	forecastValidTime = new Date(object.currently.time * 1000);
-	gustWindTime = new Date(object.daily[0].windGustTime * 1000);
+	gustWindTime = new Date(object.daily.data[0].windGustTime * 1000);
 	if (object.currently.uvIndex > 5) {
 		document.getElementById("current-uvIndex").style.color = "red";
 	} else {
@@ -163,15 +163,15 @@ function displayWeather(object) {
 	alertsTitle = object.alerts.title;
 
 	<!---forcast section -->
-	windGustForecast.innerHTML = "Wind Gusts: " + knotsToKilometres(object.daily[0].windGust);
-	windGustTime.innerHTML = "Max Gusts: " + timeConvert(gustWindTime);
+	windGustForecast.innerHTML = "Wind Gusts: " + knotsToKilometres(object.daily.data[0].windGust) + " km/h";
+	windGustTime.innerHTML = "Max Gusts: " + timeConvertShort(gustWindTime);
 	console.log("Storm: " + object.currently.nearestStormDistance);
 	//console.log("alerts: " + object.alerts);
 	document.getElementById("alerts").style.display = 'block';
 	if (alertsTitle) {
 		alertsTitle = (object.alert.summary);
 	} else {
-		alerts.innerHTML = "No Alerts as of " + timeConvert(forecastValidTime);
+		alerts.innerHTML = "No Alerts as of " + timeConvertShort(forecastValidTime);
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
@@ -180,4 +180,7 @@ function displayWeather(object) {
 let timeConvert = function(d) {
 	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
 		d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+};
+let timeConvertShort = function(d) {
+	return datestring =  ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
 };

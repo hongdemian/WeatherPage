@@ -65,6 +65,17 @@ a {
     letter-spacing: 0.2px;
     cursor: default;
 }
+h2 {
+    text-align: center;
+    display: block;
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 1.4rem;
+    padding: 0;
+    margin: 0 75px 10px;
+
+
+}
 
 #current-temperature {
     cursor: pointer;
