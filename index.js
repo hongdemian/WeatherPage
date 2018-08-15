@@ -12,9 +12,14 @@ let summary;
 let forecastValidTime;
 let object;
 let alertUrl;
+let windGust;
+let cloudCover;
+let windGustForecast;
+let windGustTime;
 
 
 window.onload = function() {
+
 	humidity = document.getElementById("current-humidity");
 	weatherIcon = document.getElementById("current-icon");
 	pressure = document.getElementById("current-pressure");
@@ -25,6 +30,8 @@ window.onload = function() {
 	windSpeed = document.getElementById("current-wind-speed");
 	windGust = document.getElementById("current-wind-gust");
 	cloudCover = document.getElementById("current-cloud-cover");
+	windGustForecast = document.getElementById("wind-gust-forecast");
+	windGustTime = document.getElementById("wind-gust-time");
 	weatherSummary = document.getElementById("weatherSummary");
 	alertsTitle = document.getElementById("alerts");
 };
@@ -129,6 +136,7 @@ function showWeather(lat, long) {
 
 
 function displayWeather(object) {
+	document.getElementById("getWeather").style.display = "none";
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
 	weatherIcon.src = weatherImages[object.currently.icon];
 	pressure.innerHTML = "Pressure: " + object.currently.pressure + " mb";
@@ -144,6 +152,7 @@ function displayWeather(object) {
 	document.getElementById("current-icon").style.backgroundColor = "hsl(216, 100%, 60%)";
 	document.getElementById("weather-summary").style.backgroundColor = "hsl(216, 100%, 60%)";
 	forecastValidTime = new Date(object.currently.time * 1000);
+	gustWindTime = new Date(object.daily[0].windGustTime * 1000);
 	if (object.currently.uvIndex > 5) {
 		document.getElementById("current-uvIndex").style.color = "red";
 	} else {
@@ -152,10 +161,11 @@ function displayWeather(object) {
 		}
 	}
 	alertsTitle = object.alerts.title;
-	console.log(object.currently.cloudCover + "Cloud Cover");
+
+	<!---forcast section -->
+	windGustForecast.innerHTML = "Wind Gusts: " + knotsToKilometres(object.daily[0].windGust);
+	windGustTime.innerHTML = "Max Gusts: " + timeConvert(gustWindTime);
 	console.log("Storm: " + object.currently.nearestStormDistance);
-	console.log("Wind Gust: " + object.daily.windGustTime);
-	console.log(forecastValidTime);
 	//console.log("alerts: " + object.alerts);
 	document.getElementById("alerts").style.display = 'block';
 	if (alertsTitle) {
