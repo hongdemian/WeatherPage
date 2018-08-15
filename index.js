@@ -1,15 +1,14 @@
-var humidity;
-var weatherIcon;
-var pressure;
-var uvIndex;
-var temperature;
-var temperatureIcon;
-var windBearing;
-var windSpeed;
-var weatherSummary;
-var alerts;
-var summary;
-var currentTime;
+let humidity;
+let weatherIcon;
+let pressure;
+let uvIndex;
+let temperature;
+let temperatureIcon;
+let windBearing;
+let windSpeed;
+let weatherSummary;
+let alerts;
+let summary;
 
 window.onload = function() {
 	humidity = document.getElementById("current-humidity");
@@ -20,12 +19,13 @@ window.onload = function() {
 	temperatureIcon = document.getElementById("temperature-icon");
 	windBearing = document.getElementById("current-wind-bearing");
 	windSpeed = document.getElementById("current-wind-speed");
-	weatherSummary = document.getElementById("weather-summary");
-	if (alerts) {
+	weatherSummary = document.getElementById("weatherSummary");
+	console.log(alerts);
+	if (alerts !== 'undefined') {
 		alerts = document.getElementById("alerts");
 	} else {
 		alerts = "No Alerts as of " + timeToStandard(object.hourly.data.time);
-	}
+	};
 	summary = document.getElementById("summary");
 }
 
@@ -120,8 +120,14 @@ function displayWeather(object) {
 	weatherSummary.innerHTML = "Current Location: " + object.timezone + " <br/> <br/> Weather Summary: " + object.currently.summary;
 	document.getElementById("current-icon").style.backgroundColor = "hsl(216, 100%, 60%)";
 	document.getElementById("weather-summary").style.backgroundColor = "hsl(216, 100%, 60%)";
-	alerts.innerHTML = "Alerts: " + object.alerts.title;
+	if (!object.alerts.title) {
+		alertStatus = "None!";
+		document.getElementById('alerts').style.visibility = "hidden";
+	} else {
+		alertStatus = object.alerts.title;
+		document.getElementById("alerts").style.color = "red";
+	}
+	alerts.innerHTML = "Alerts: " + alertStatus;
 	summary.innerHTML = object.hourly.summary;
-
-	console.log(object);
+	//console.log(object);
 }

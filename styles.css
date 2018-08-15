@@ -82,8 +82,9 @@ a {
 }
 #weather-summary {
     width: 400px;
-    height: 50px;
-    margin-left: 35%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 2%;
     border-radius: 10px;
     font-family: 'Fresca', sans-serif;
@@ -95,7 +96,6 @@ a {
     padding: 10px;
     line-height: 18px;
     opacity: 0.8;
-    background-color: hsl(216,100%,90%);
 }
 .extras {
     margin: auto;
@@ -103,7 +103,7 @@ a {
     background-color: cadetblue;
     height: auto;
 }
-#alerts{
+.alerts {
     width: 400px;
     height: 50px;
     margin-left: 35%;
@@ -119,4 +119,13 @@ a {
     line-height: 18px;
     opacity: 0.8;
     background-color: hsl(216, 100%, 90%);
+}
+
+ul a {
+    text-align: center;
+    margin: 0 auto;
+    padding-left: -113px;
+    padding-top: 5px;
+    color: #ffffff;
+
 }
