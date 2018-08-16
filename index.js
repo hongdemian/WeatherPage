@@ -104,24 +104,24 @@ let weatherImages = {
 	"tornado": "http://hddfhm.com/images/clipart-of-a-tornado-11.png"
 };
 
-var getWeather = function() {
- 	if(navigator.geolocation){
- 		navigator.geolocation.getCurrentPosition(function(position){
- 			var lat = position.coords.latitude;
- 			var long = position.coords.longitude;
- 			showWeather(lat, long)
- 		})
- 	}
- 	else {
- 		window.alert("Could not get location");
- 	}
- };
+// var getWeather = function() {
+//  	if(navigator.geolocation){
+//  		navigator.geolocation.getCurrentPosition(function(position){
+//  			var lat = position.coords.latitude;
+//  			var long = position.coords.longitude;
+//  			showWeather(lat, long)
+//  		})
+//  	}
+//  	else {
+//  		window.alert("Could not get location");
+//  	}
+//  };
 
-// let getWeather = function () {
-// 	let lat = 51.0253;
-// 	let long = -114.0499;
-// 	showWeather(lat, long)
-// };
+let getWeather = function () {
+	let lat = 51.0253;
+	let long = -114.0499;
+	showWeather(lat, long)
+};
 
 function showWeather(lat, long) {
 	let url = `https://api.darksky.net/forecast/459d95a8fbfada306d82991efda5b383/${lat},${long}` + `?format=jsonp&callback=displayWeather`;
