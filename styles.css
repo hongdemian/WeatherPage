@@ -47,7 +47,7 @@ body {
 
 #current-weather-details {
     margin: 2% auto;
-    width: 80%;
+    max-width: 80%;
     height: auto;
     padding: 10px;
     border-radius: 10px;
@@ -110,7 +110,7 @@ h2 {
     color: #FFFFFF;
 }
 #weather-summary {
-    width: 400px;
+    max-width: 80%;
     height: auto;
     margin-left: auto;
     margin-right: auto;
