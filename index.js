@@ -175,6 +175,7 @@ function displayWeather(object) {
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
+	console.log(object.currently);
 }
 
 let timeConvert = function(d) {
