@@ -18,8 +18,7 @@ let windGustForecast;
 let windGustTime;
 
 
-window.onload = function() {
-
+let showResults = function() {
 	humidity = document.getElementById("current-humidity");
 	weatherIcon = document.getElementById("current-icon");
 	pressure = document.getElementById("current-pressure");
@@ -182,4 +181,9 @@ let timeConvert = function(d) {
 };
 let timeConvertShort = function(d) {
 	return datestring =  ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+};
+window.onload = function() {
+	showResults();
+	getWeather();
+	alert("getWeather!")
 };
