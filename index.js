@@ -57,8 +57,8 @@ function timeToStandard(time) {
 	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
-function farenheitToCelsius(k) {
-	return Math.round((k - 32) * 0.5556 );
+function celsiusToFarenheit(k) {
+	return Math.round(k * 9/5) + 32;
 }
 
 function humidityPercentage(h) {
@@ -103,18 +103,6 @@ let weatherImages = {
 	"tornado": "http://hddfhm.com/images/clipart-of-a-tornado-11.png"
 };
 
-// var getWeather = function() {
-//  	if(navigator.geolocation){
-//  		navigator.geolocation.getCurrentPosition(function(position){
-//  			var lat = position.coords.latitude;
-//  			var long = position.coords.longitude;
-//  			showWeather(lat, long)
-//  		})
-//  	}
-//  	else {
-//  		window.alert("Could not get location");
-//  	}
-//  };
 
 let getWeather = function () {
 	let lat = 0;
@@ -133,7 +121,6 @@ console.log(`Lat: ${lat}, Long: ${long}`);
 		document.getElementById("noLocation").style.display = "show";
 	}*/
 	showWeather(lat, long);
-
 };
 
 function showWeather(lat, long) {
@@ -151,7 +138,7 @@ function displayWeather(object) {
 	weatherIcon.src = weatherImages[object.currently.icon];
 	pressure.innerHTML = "Pressure: " + object.currently.pressure + " mb";
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
-	temperature.innerHTML = farenheitToCelsius(object.currently.temperature) + " C" + " / " + Math.round(object.currently.temperature) + " F";
+	temperature.innerHTML = Math.round(object.currently.temperature) + " C" + " / " + celsiusToFarenheit(object.currently.temperature) + " F";
 	temperatureIcon.src = "https://cdn4.iconfinder.com/data/icons/medicons-2/512/thermometer-512.png";
 	windBearing.innerHTML = "Wind Direction: " + degreesToDirection(object.currently.windBearing);
 	windSpeed.innerHTML = "Wind Speed: " + knotsToKilometres(object.currently.windSpeed) + " km/h";
