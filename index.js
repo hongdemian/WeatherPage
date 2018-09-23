@@ -174,7 +174,10 @@ function displayWeather(object) {
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
-	console.log(object.hourly.data);
+	console.log("Currently: " + object.currently.data);
+	console.log("Hourly: " + object.hourly.data);
+	console.log("else: "+  object.daily.data);
+	console.log("alerts: " + object.data)
 }
 let timeConvert = function(d) {
 	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
