@@ -122,7 +122,7 @@ let getWeather = function () {
 	lat = 51.0253;
 	long = -114.0499;
 	if(navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition();
+		navigator.geolocation.getCurrentPosition(position);
 			lat = position.coords.latitude;
 			long = position.coords.longitude;
 	} else {
