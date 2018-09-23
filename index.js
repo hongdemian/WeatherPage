@@ -122,9 +122,11 @@ let getWeather = function () {
 	lat = 51.0253;
 	long = -114.0499;
 	if(navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition);
-		lat = position.coords.latitude;
-		long = position.coords.longitude;
+		navigator.geolocation.getCurrentPosition(position (); => {
+			lat = position.coords.latitude;
+			long = position.coords.longitude;
+		}
+	)
 	} else {
 		noLocation.innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
 		document.getElementById("noLocation").style.display = "show";
