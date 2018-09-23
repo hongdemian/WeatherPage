@@ -121,7 +121,7 @@ let getWeather = function () {
 	let long = 0;
 	lat = 51.0253;
 	long = -114.0499;
-	let showPosition = position => {
+	/*let showPosition = position => {
 		lat = position.coords.latitude;
 		long = position.coords.longitude;
 	};
@@ -131,7 +131,7 @@ console.log(`Lat: ${lat}, Long: ${long}`);
 	} else {
 		noLocation.innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
 		document.getElementById("noLocation").style.display = "show";
-	}
+	}*/
 	showWeather(lat, long);
 
 };
@@ -147,7 +147,6 @@ function showWeather(lat, long) {
 
 
 function displayWeather(object) {
-	// document.getElementById("getWeather").style.display = "none";
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
 	weatherIcon.src = weatherImages[object.currently.icon];
 	pressure.innerHTML = "Pressure: " + object.currently.pressure + " mb";
@@ -177,7 +176,7 @@ function displayWeather(object) {
 		alertsTitle = "";
 	}
 
-	<!---forcast section -->
+	<!---forecast section -->
 	windGustForecast.innerHTML = "Wind Gusts: " + knotsToKilometres(object.daily.data[0].windGust) + " km/h";
 	windGustTime.innerHTML = "Max Gusts: " + timeConvertShort(gustWindTime);
 	console.log("Storm: " + object.currently.nearestStormDistance);

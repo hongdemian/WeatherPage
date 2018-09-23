@@ -21,14 +21,14 @@ body {
 }
 
 #noLocation {
-    display: none;
+    display: block;
     color: red;
 }
 #alerts {
     padding: 10px;
     height: auto;
     text-align: center;
-    color: #FFFFFF;
+    color: darkslategrey;
     visibility: hidden;
     font-family: 'Fresca', sans-serif;
     font-size: larger;
@@ -89,32 +89,6 @@ h2 {
     cursor: pointer;
 }
 
-#getWeather {
-    height: 70px;
-    width: 200px;
-    font-size: 17px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-family: 'Fresca', sans-serif;
-    background-color: #FFFFFF;
-    opacity: 0.8;
-    color: hsl(216, 100%, 60%);
-    transition: 0.5s;
-}
-
-#getWeather:hover {
-    background-color: hsla(216, 100%, 60%, 0.8);
-    color: #FFFFFF;
-    border: 3px solid #FFFFFF;
-    border-radius: 5px;
-}
-
-#getWeather:active {
-    background-color: hsl(216, 100%, 90%);
-    color: #FFFFFF;
-}
 #weather-summary {
     max-width: 80%;
     height: auto;
@@ -135,6 +109,7 @@ h2 {
 }
 
 footer p {
+    display: block;
     text-align: center;
     background-color:cornflowerblue;
     color:darkslategray;
