@@ -108,6 +108,7 @@ let getWeather = function () {
 	let long = 0;
 	lat = 51.0253;
 	long = -114.0499;
+	document.getElementById("noLocation").style.display = "show";
 	/*let showPosition = position => {
 		lat = position.coords.latitude;
 		long = position.coords.longitude;
