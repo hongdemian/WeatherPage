@@ -125,7 +125,7 @@ let getWeather = function () {
 		lat = position.coords.latitude;
 		long = position.coords.longitude;
 	};
-
+console.log(`Lat: ${lat}, Long: ${long}`);
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(showPosition);
 	} else {
