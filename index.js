@@ -143,7 +143,7 @@ function showWeather(lat, long) {
 
 
 function displayWeather(object) {
-	document.getElementById("getWeather").style.display = "none";
+	// document.getElementById("getWeather").style.display = "none";
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
 	weatherIcon.src = weatherImages[object.currently.icon];
 	pressure.innerHTML = "Pressure: " + object.currently.pressure + " mb";
