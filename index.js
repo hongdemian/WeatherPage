@@ -173,7 +173,7 @@ function displayWeather(object) {
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
-	console.log(object.hourly);
+	console.log(object.hourly.data);
 }
 let timeConvert = function(d) {
 	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
