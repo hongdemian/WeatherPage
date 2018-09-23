@@ -171,7 +171,11 @@ function displayWeather(object) {
 			document.getElementById("current-uvIndex").style.color = "dark-green";
 		}
 	}
-	alertsTitle = object.alerts.title;
+	if (object.alerts != undefined) {
+		alertsTitle = object.alerts.title;
+	} else {
+		alertsTitle = "";
+	}
 
 	<!---forcast section -->
 	windGustForecast.innerHTML = "Wind Gusts: " + knotsToKilometres(object.daily.data[0].windGust) + " km/h";
