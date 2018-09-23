@@ -181,7 +181,7 @@ function displayWeather(object) {
 	windGustForecast.innerHTML = "Wind Gusts: " + knotsToKilometres(object.daily.data[0].windGust) + " km/h";
 	windGustTime.innerHTML = "Max Gusts: " + timeConvertShort(gustWindTime);
 	console.log("Storm: " + object.currently.nearestStormDistance);
-	//console.log("alerts: " + object.alerts);
+	console.log("alerts: " + object.alerts);
 	document.getElementById("alerts").style.visibility = 'visible';
 	if (alertsTitle) {
 		alertsTitle = (object.alert.summary);
@@ -191,7 +191,7 @@ function displayWeather(object) {
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
-	console.log(object.currently);
+	console.log(object);
 }
 
 let timeConvert = function(d) {
