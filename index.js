@@ -174,9 +174,10 @@ function displayWeather(object) {
 	windGustTime.innerHTML = "Max Gusts: " + timeConvertShort(gustWindTime);
 	console.log("Storm: " + object.currently.nearestStormDistance);
 	//console.log("alerts: " + object.alerts);
-	document.getElementById("alerts").style.display = 'block';
+	document.getElementById("alerts").style.display = 'show';
 	if (alertsTitle) {
 		alertsTitle = (object.alert.summary);
+
 	} else {
 		alerts.innerHTML = "No Alerts as of " + timeConvertShort(forecastValidTime);
 	}
