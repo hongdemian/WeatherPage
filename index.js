@@ -121,6 +121,11 @@ let getWeather = function () {
 	let long = 0;
 	lat = 51.0253;
 	long = -114.0499;
+	let showPosition = position => {
+		lat = position.coords.latitude;
+		long = position.coords.longitude;
+	};
+
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(showPosition);
 	} else {
@@ -128,10 +133,7 @@ let getWeather = function () {
 		document.getElementById("noLocation").style.display = "show";
 	}
 	showWeather(lat, long);
-	showPosition = position => {
-		lat = position.coords.latitude;
-		long = position.coords.longitude;
-	};
+
 };
 
 function showWeather(lat, long) {
