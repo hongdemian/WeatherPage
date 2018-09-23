@@ -103,7 +103,6 @@ let weatherImages = {
 	"tornado": "http://hddfhm.com/images/clipart-of-a-tornado-11.png"
 };
 
-
 let getWeather = function () {
 	let lat = 0;
 	let long = 0;
@@ -131,7 +130,6 @@ function showWeather(lat, long) {
 	document.getElementsByTagName("head")[0].appendChild(script);
 	displayWeather(object)
 }
-
 
 function displayWeather(object) {
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
@@ -168,18 +166,15 @@ function displayWeather(object) {
 	windGustTime.innerHTML = "Max Gusts: " + timeConvertShort(gustWindTime);
 	console.log("Storm: " + object.currently.nearestStormDistance);
 	console.log("alerts: " + object.alerts);
-	document.getElementById("alerts").style.visibility = 'visible';
 	if (alertsTitle) {
 		alertsTitle = (object.alert.summary);
-
 	} else {
 		alerts.innerHTML = "No Alerts as of " + timeConvertShort(forecastValidTime);
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
-	console.log(object);
+	console.log(object.hourly);
 }
-
 let timeConvert = function(d) {
 	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
 		d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
