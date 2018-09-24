@@ -29,7 +29,7 @@ body {
     padding: 10px;
     height: auto;
     text-align: center;
-    color: red;
+    color: orangered;
     visibility: hidden;
     font-family: 'Fresca', sans-serif;
     font-size: larger;
@@ -62,15 +62,16 @@ body {
     justify-content: center;
     align-content: space-around;
     flex-wrap: wrap;
-    background-color: lightslategrey;
+    background-color: darkslategray;
     opacity:.7;
 }
 
 a {
+    display:block;
     width: 200px;
-    font-size: 3rem;
+    font-size: .9rem;
     text-align: center;
-    color: #FFFFFF;
+    color: #eee;
     font-family: 'Fresca', sans-serif;
     letter-spacing: 0.2px;
     cursor: default;
