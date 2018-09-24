@@ -96,6 +96,22 @@ function knotsToKilometres(knot) {
 }
 
 let weatherImages = {
+	"clear-day": "./icons/sun.svg",
+	"clear-night": "./icons/Moon.svg",
+	"rain": "./icons/Cloud-Rain.svg",
+	"snow": "./icons/Cloud-Snow.svg",
+	"sleet": "./icons/Cloud-Hail-Alt.svg",
+	"wind": "./icons/Wind.svg",
+	"fog": "./icons/Cloud-Fog.svg",
+	"cloudy": "./icons/Cloud.svg",
+	"partly-cloudy-day": "./icons/Cloud-Sun.svg",
+	"partly-cloudy-night": "./icons/Cloud-Wind-Moon.svg",
+	"hail": "./icons/Cloud-Hail.svg",
+	"thunderstorm": "./icons/Cloud-Lightning.svg",
+	"tornado": "./icons/Tornado.svg"
+};
+
+/*let weatherIcons = {
 	"clear-day": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Sun_icon.svg/252px-Sun_icon.svg.png",
 	"clear-night": "http://www.clker.com/cliparts/f/S/2/p/7/u/gold-matte-moon.svg",
 	"rain": "https://cdn3.iconfinder.com/data/icons/weather-16/256/Rainy_Day-512.png",
@@ -109,7 +125,7 @@ let weatherImages = {
 	"hail": "http://icons.iconarchive.com/icons/icons8/ios7/256/Weather-Hail-icon.png",
 	"thunderstorm": "http://findicons.com/files/icons/2613/android_weather_extended/480/thunderstorms.png",
 	"tornado": "http://hddfhm.com/images/clipart-of-a-tornado-11.png"
-};
+};*/
 
 let getWeather = function () {
 	let lat = 0;

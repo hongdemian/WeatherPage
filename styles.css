@@ -33,6 +33,7 @@ body {
     height: 90px;
     text-align: center;
     margin: auto 0;
+    color: black;
 }
 .special-statements {
     padding: 10px;
@@ -116,6 +117,7 @@ footer p {
 }
 
 @media all and (max-device-width: 400px) {
+    
     .weather-container, .header-container .forecast-container{
         /* On small screens, we are no longer using row direction but column */
         flex-direction: column;
@@ -123,7 +125,8 @@ footer p {
         align-items: flex-start;
         justify-content: space-around;
     }
-    .card {
-        max-width: 100%;
+    footer p {
+        text-align: center;
     }
+
 }
