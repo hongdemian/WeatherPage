@@ -10,39 +10,51 @@
 
 </head>
 <body>
-<div>
-    <p id="noLocation">--</p>
+<div class="header-container">
+<img id="current-icon" class="header-detail">
+<p id="current-temperature" class="header-detail"> -- </p>
 </div>
-<img id="current-icon">
-<div id="alerts">
-    <a href="#">No alerts in forecast！</a>
+
+<div class="special-statements">
+<div id="location"> -- </div>
+<div id="alerts"> -- </div>
 </div>
-<div id="current-weather-details" class="section group">
-    <div class="span_1_of_3">
-    <a id="current-humidity">--</a>
-    <a id="current-pressure">--</a>
-    <a id="current-uvIndex">--</a>
-    <img id="temperature-icon">
-    <a id="current-temperature">--</a>
-    </div>
-    <div class="span_1_of_3">
-    <a id="current-wind-bearing">--</a>
-    <a id="current-wind-speed">--</a>
-    <a id="current-cloud-cover">--</a>
-    <a id="current-wind-gust">--</a>
-    </div>
+<div class="weather-container">
+<div id="current-weather-details" class="card">
+    <h2>Current Conditions:</h2>
+   <ul>
+       <li><a id="current-humidity">--</a></li>
+       <li><a id="current-uvIndex">--</a></li>
+       <li><a id="current-temperature-feels">--</a></li>
+       <li><a id="current-cloud-cover">--</a></li>
+       <li><a id="current-precip-possible"> -- </a> </li>
+       <li><a id="current-precip-type"></a></li>
+   </ul>
 </div>
-<div id="weather-summary" class="section group span_1_of_3">
+<div id="wind" class="card">
+    <h2>Wind Conditions:</h2>
+   <ul>
+       <li><a id="current-wind-speed">--</a></li>
+       <li><a id="current-wind-gust">--</a></li>
+       <li><a id="current-wind-bearing">--</a></li>
+   </ul>
+</div>
+<div id="weather-summary" class="card">
     <a id="weatherSummary"></a>
 </div>
-<div class="section group span_1_of_3">
+<div class="card">
     <h2>Weather Forecast:</h2>
-    <a id="wind-gust-forecast">--</a>
-    <a id="wind-gust-time">--</a>
+    <ul>
+        <li><a id="wind-gust-forecast">--</a></li>
+        <li><a id="week-forecast">--</a></li>
+    </ul>
+
+</div>
 </div>
 
 </body>
 <footer>
-    <p href="https://darksky.net/poweredby/">Powered by DarkSky</p>
+    <p><a href="https://darksky.net/poweredby/" target="_blank">Powered by DarkSky</a></p>
+    <p><a href="http://adamwhitcroft.com/climacons/" target="_blank">Weather icons by: Climacons</a></p>
 </footer>
 </html>

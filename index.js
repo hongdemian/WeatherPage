@@ -16,6 +16,10 @@ let windGust;
 let cloudCover;
 let windGustForecast;
 let windGustTime;
+let feelsLike;
+let precipPossible;
+let precipType;
+let weekForecast;
 
 
 let showResults = function() {
@@ -33,6 +37,10 @@ let showResults = function() {
 	windGustTime = document.getElementById("wind-gust-time");
 	weatherSummary = document.getElementById("weatherSummary");
 	alertsTitle = document.getElementById("alerts");
+	feelsLike = document.getElementById("current-temperature-feels");
+	precipPossible = document.getElementById("current-precip-possible");
+	precipType = document.getElementById("current-precip-type");
+	weekForecast = document.getElementById("week-forecast");
 };
 
 /*function timeToStandard(time) {
@@ -108,18 +116,19 @@ let getWeather = function () {
 	let long = 0;
 	lat = 51.0253;
 	long = -114.0499;
-	document.getElementById("noLocation").style.display = "show";
+	document.getElementById("location").style.visibility = "visible";
+	alertScr = "";
 	/*let showPosition = position => {
 		lat = position.coords.latitude;
 		long = position.coords.longitude;
-	};
+	};*/
 console.log(`Lat: ${lat}, Long: ${long}`);
-	if(navigator.geolocation) {
+	if (false) {
 		navigator.geolocation.getCurrentPosition(showPosition);
 	} else {
-		noLocation.innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
-		document.getElementById("noLocation").style.display = "show";
-	}*/
+		document.getElementById("location").innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
+		document.getElementById("location").style.visibility = "visible";
+	}
 	showWeather(lat, long);
 };
 
@@ -135,18 +144,27 @@ function showWeather(lat, long) {
 function displayWeather(object) {
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
 	weatherIcon.src = weatherImages[object.currently.icon];
-	pressure.innerHTML = "Pressure: " + object.currently.pressure + " mb";
+	// pressure.innerHTML = "Pressure: " + object.currently.pressure + " mb";
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
-	temperature.innerHTML = Math.round(object.currently.temperature) + " C" + " / " + celsiusToFarenheit(object.currently.temperature) + " F";
-	temperatureIcon.src = "https://cdn4.iconfinder.com/data/icons/medicons-2/512/thermometer-512.png";
+	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
+	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature, 1) + " C";
+	precipPossible.innerHTML = "Chance of Precip: " + (object.currently.precipProbability * 100) + "%";
+	if (object.currently.precipProbability > .4) {
+		precipType.style.visibility = "visible"
+	}
 	windBearing.innerHTML = "Wind Direction: " + degreesToDirection(object.currently.windBearing);
 	windSpeed.innerHTML = "Wind Speed: " + knotsToKilometres(object.currently.windSpeed) + " km/h";
 	windGust.innerHTML = "Wind Gusts: " + knotsToKilometres(object.currently.windGust) + " km/h";
+	if (object.currently.windSpeed >= 30) {
+		windSpeed.addClass("alerts");
+	}
+	if (object.currently.windGust >= 30) {
+		windGust.addClass("alerts");
+	}
 	cloudCover.innerHTML = "Cloud Cover: " + humidityPercentage(object.currently.cloudCover) + "%";
-	weatherSummary.innerHTML = "<span class='summaryTitles'> Current Location:  </span>" + object.timezone + "<br/> <br/><span class='summaryTitles'> Weather Summary: </span>" + object.currently.summary
-		+ "<br/><br/> <span class='summaryTitles'>Forecast Summary: </span>" + object.hourly.summary;
-	document.getElementById("current-icon").style.backgroundColor = "hsl(216, 100%, 60%)";
-	document.getElementById("weather-summary").style.backgroundColor = "hsl(216, 100%, 60%)";
+	weatherSummary.innerHTML = "<span class='summaryTitles'> Current Location:  </span></br>" + object.timezone + "<br/><span class='summaryTitles'> Weather Summary: </span></br>" + object.currently.summary
+		+ "<br/><span class='summaryTitles'>Forecast Summary: </span></br>" + object.hourly.summary;
+	weekForecast.innerHTML = object.daily.summary;
 	forecastValidTime = new Date(object.currently.time * 1000);
 	gustWindTime = new Date(object.daily.data[0].windGustTime * 1000);
 	if (object.currently.uvIndex > 5) {
@@ -163,8 +181,8 @@ function displayWeather(object) {
 	}
 
 	<!---forecast section -->
-	windGustForecast.innerHTML = "Wind Gusts: " + knotsToKilometres(object.daily.data[0].windGust) + " km/h";
-	windGustTime.innerHTML = "Max Gusts: " + timeConvertShort(gustWindTime);
+console.log(object.currently.summary);
+	windGustForecast.innerHTML = "Wind Gusts: " + knotsToKilometres(object.daily.data[0].windGust) + " km/h</br> at: " + timeConvertShort(gustWindTime);
 	console.log("Storm: " + object.currently.nearestStormDistance);
 	console.log("alerts: " + object.alerts);
 	if (alertsTitle) {
@@ -174,10 +192,7 @@ function displayWeather(object) {
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
-	console.log("Currently: " + object.currently.data);
-	console.log("Hourly: " + object.hourly.data);
-	console.log("else: "+  object.daily.data);
-	console.log("alerts: " + object.data)
+	console.log(JSON.stringify(object));
 }
 let timeConvert = function(d) {
 	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
