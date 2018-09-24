@@ -123,7 +123,7 @@ footer p {
     padding-right: 40px;
 }
 
-@media all and (max-width: 500px) {
+@media all and (max-device-width: 400) {
     .weather-container, .header-container .forecast-container{
         /* On small screens, we are no longer using row direction but column */
         flex-direction: column;

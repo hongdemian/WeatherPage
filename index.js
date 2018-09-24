@@ -144,7 +144,6 @@ function showWeather(lat, long) {
 function displayWeather(object) {
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
 	weatherIcon.src = weatherImages[object.currently.icon];
-	// pressure.innerHTML = "Pressure: " + object.currently.pressure + " mb";
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
 	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
 	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature, 1) + " C";
