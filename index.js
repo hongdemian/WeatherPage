@@ -116,7 +116,7 @@ let getWeather = function () {
 	let long = 0;
 	lat = 51.0253;
 	long = -114.0499;
-	document.getElementById("location").style.visibility = "visible";
+	//document.getElementById("location").style.visibility = "visible";
 	alertScr = "";
 	/*let showPosition = position => {
 		lat = position.coords.latitude;
@@ -126,8 +126,7 @@ console.log(`Lat: ${lat}, Long: ${long}`);
 	if (false) {
 		navigator.geolocation.getCurrentPosition(showPosition);
 	} else {
-		document.getElementById("location").innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
-		document.getElementById("location").style.visibility = "visible";
+	//	document.getElementById("location").innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
 	}
 	showWeather(lat, long);
 };
@@ -147,7 +146,7 @@ function displayWeather(object) {
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
 	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
 	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature, 1) + " C";
-	precipPossible.innerHTML = "Chance of Precip: " + (object.currently.precipProbability * 100) + "%";
+	precipPossible.innerHTML = "Chance of " + (object.currently.precipType).toUpperCase() + ": " + (Math.round(object.currently.precipProbability * 100)) + "%";
 	if (object.currently.precipProbability > .4) {
 		precipType.style.visibility = "visible"
 	}
