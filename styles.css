@@ -62,7 +62,8 @@ body {
     justify-content: center;
     align-content: space-around;
     flex-wrap: wrap;
-    background-color: hsla(216, 100%, 60%, 0.8);
+    background-color: lightslategrey;
+    opacity:.7;
 }
 
 a {
