@@ -102,13 +102,14 @@ h2 {
     visibility: hidden;
 }
 footer {
-    height: 4rem;
+    height: 2rem;
     background-color:lightskyblue;
     position: fixed;
-    bottom: 5px;
+    bottom: 0px;
     color:darkslategray;
     font-size:1.5rem;
     width: 100%;
+    padding-bottom: 28px;
 }
 footer p {
     display: inline-block;
@@ -117,14 +118,16 @@ footer p {
 }
 
 @media all and (max-device-width: 400px) {
-    
+
     .weather-container, .header-container .forecast-container{
         /* On small screens, we are no longer using row direction but column */
         flex-direction: column;
         flex-wrap: wrap;
         align-items: flex-start;
-        justify-content: space-around;
+        justify-content: flex-start;
+        flex: 1 100%;
     }
+    footer
     footer p {
         text-align: center;
     }

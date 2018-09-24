@@ -11,7 +11,10 @@ let alertsTitle;
 let summary;
 let forecastValidTime;
 let object;
-let alertUrl;
+let alertsUrl;
+let alertsExpires;
+let alertsTimeIssued;
+let alertsSummary;
 let windGust;
 let cloudCover;
 let windGustForecast;
@@ -104,8 +107,8 @@ let weatherImages = {
 	"wind": "./icons/Wind.svg",
 	"fog": "./icons/Cloud-Fog.svg",
 	"cloudy": "./icons/Cloud.svg",
-	"partly-cloudy-day": "./icons/Cloud-Sun.svg",
-	"partly-cloudy-night": "./icons/Cloud-Wind-Moon.svg",
+	"partly-cloudy-day": "/icons/Cloud-Sun.svg",
+	"partly-cloudy-night": "/icons/Cloud-Wind-Moon.svg",
 	"hail": "./icons/Cloud-Hail.svg",
 	"thunderstorm": "./icons/Cloud-Lightning.svg",
 	"tornado": "./icons/Tornado.svg"
@@ -190,6 +193,11 @@ function displayWeather(object) {
 	}
 	if (object.alerts != undefined) {
 		alertsTitle = object.alerts.title;
+		alertsSummary = object.alerts.description;
+		alertsTimeIssued = object.alerts.time;
+		alertsExpires = object.alerts.expires;
+		alertsUrl = object.alerts.uri;
+		alertInEffect();
 	} else {
 		alertsTitle = "";
 	}
@@ -208,6 +216,11 @@ function displayWeather(object) {
 	document.getElementById("alerts").style.visibility = "visible";
 	console.log(JSON.stringify(object));
 }
+
+let forecastBuild = (object) => {
+
+};
+
 let timeConvert = function(d) {
 	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
 		d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
@@ -219,4 +232,8 @@ window.onload = function() {
 	showResults();
 	getWeather();
 	alert("getWeather!")
+};
+
+let alertInEffect = () => {
+	window.alert("Weather Alert In Effect!</br>" + alertTitle + " Issued at: " + timeConvertShort(alertsTimeIssued)+ ".</br>" + "Expires at: " + timeConvertShort(alertsExpires) + ". </br>" + alertsSummary);
 };
