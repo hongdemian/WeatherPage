@@ -4,7 +4,7 @@
 body {
     /*background: url(https://orig13.deviantart.net/64e8/f/2010/230/0/6/skies_of_blue_by_naturedrop.jpg) no-repeat top center fixed;*/
     background-size: cover;
-    background-color: whitesmoke;
+    background-color: lightslategrey;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -29,7 +29,7 @@ body {
     padding: 10px;
     height: auto;
     text-align: center;
-    color: darkslategrey;
+    color: red;
     visibility: hidden;
     font-family: 'Fresca', sans-serif;
     font-size: larger;
@@ -68,7 +68,7 @@ body {
 
 a {
     width: 200px;
-    font-size: 21px;
+    font-size: 3rem;
     text-align: center;
     color: #FFFFFF;
     font-family: 'Fresca', sans-serif;
@@ -117,6 +117,7 @@ footer p {
     color:darkslategray;
     font-size:1.5rem;
     max-width: 80%;
+    padding: 10px;
     margin: 0 auto;
 }
 
