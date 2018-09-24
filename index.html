@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Weather Alerts and Forecast</title>
     <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="index.js"> </script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
@@ -16,16 +17,20 @@
 <div id="alerts">
     <a href="#">No alerts in forecast！</a>
 </div>
-<div id="current-weather-details">
+<div id="current-weather-details" class="section-group">
+    <div class="span_1_of_3">
     <a id="current-humidity">--</a>
     <a id="current-pressure">--</a>
     <a id="current-uvIndex">--</a>
     <img id="temperature-icon">
     <a id="current-temperature">--</a>
+    </div>
+    <div class="span_1_of_3">
     <a id="current-wind-bearing">--</a>
     <a id="current-wind-speed">--</a>
     <a id="current-cloud-cover">--</a>
     <a id="current-wind-gust">--</a>
+    </div>
 </div>
 <div id="weather-summary">
     <a id="weatherSummary"></a>
