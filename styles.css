@@ -9,9 +9,7 @@ body {
     color: darkslategrey;
 }
 .header-container {
-    border: solid 1px black;
-    margin: auto;
-    max-width: 20%;
+    margin: 5px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,26 +17,22 @@ body {
     color: darkslategrey;
 }
 .header-detail {
-    background-color: whitesmoke;
+    background-color: skyblue;
     border-radius: 10px;
-    border: solid 1px darkred;
-    flex-direction: row-reverse;
-}
-img {
-    display: inline-block;
+    flex-direction: column;
+    width: 90px;
+    height: auto;
+    padding: 10px;
 }
 #current-icon {
-    width: 90px;
-    height: 90px;
-    float: left;
+    display: inline-block;
 }
 #current-temperature {
-    margin: auto;
-    text-align: center;
-    width: 90px;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-style: italic;
     height: 90px;
+    text-align: center;
+    margin: auto 0;
 }
 .special-statements {
     padding: 10px;
@@ -60,7 +54,7 @@ h2, .summaryTitles {
     font-weight: 600;
     font-size: 1.2rem;
     color:gray(25%);
-    line-height: 2rem;
+    line-height: 1.7rem;
     text-align: center;
     text-decoration: underline;
     text-underline-style: dash-long;
@@ -70,20 +64,17 @@ h2, .summaryTitles {
 }
 .weather-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center;
-    align-content: initial;
-    margin: auto;
-    height: 300px;
+    height: auto;
 }
 .card {
     margin: 20px auto;
     max-width: 33%;
-    padding: 10px 10px;
+    padding: 10px 15px;
     flex-basis: auto max-content;
     text-align: center;
-    justify-content: left;
     border-radius: 10px;
     background-color: skyblue;
     opacity:.9;
@@ -128,6 +119,11 @@ footer p {
     .weather-container, .header-container .forecast-container{
         /* On small screens, we are no longer using row direction but column */
         flex-direction: column;
-        width: 100%;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-around;
+    }
+    .card {
+        width: 100%
     }
 }

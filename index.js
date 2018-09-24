@@ -179,8 +179,8 @@ function displayWeather(object) {
 	}
 
 	<!---forecast section -->
-console.log(object.currently.summary);
-	windGustForecast.innerHTML = "Wind Gusts: " + knotsToKilometres(object.daily.data[0].windGust) + " km/h</br> at: " + timeConvertShort(gustWindTime);
+    console.log(object.currently.summary);
+	windGustForecast.innerHTML = "Wind Peak: </br>" + knotsToKilometres(object.daily.data[0].windGust) + " km/h at: " + timeConvertShort(gustWindTime) + "</br>";
 	console.log("Storm: " + object.currently.nearestStormDistance);
 	console.log("alerts: " + object.alerts);
 	if (alertsTitle) {
