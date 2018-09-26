@@ -13,7 +13,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    align-content: center;
     color: darkslategrey;
 }
 .header-detail {

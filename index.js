@@ -107,8 +107,8 @@ let weatherImages = {
 	"wind": "./icons/Wind.svg",
 	"fog": "./icons/Cloud-Fog.svg",
 	"cloudy": "./icons/Cloud.svg",
-	"partly-cloudy-day": "/icons/Cloud-Sun.svg",
-	"partly-cloudy-night": "/icons/Cloud-Wind-Moon.svg",
+	"partly-cloudy-day": "./icons/Cloud-Sun.svg",
+	"partly-cloudy-night": "./icons/Cloud-Wind-Moon.svg",
 	"hail": "./icons/Cloud-Hail.svg",
 	"thunderstorm": "./icons/Cloud-Lightning.svg",
 	"tornado": "./icons/Tornado.svg"
@@ -165,7 +165,15 @@ function displayWeather(object) {
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
 	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
 	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature, 1) + " C";
-	precipPossible.innerHTML = "Chance of " + (object.currently.precipType).toUpperCase() + ": " + (Math.round(object.currently.precipProbability * 100)) + "%";
+	//console.log(object.currently.precipType);
+	if (object.currently.precipType != undefined) {
+		console.log('true');
+		precipType = object.currently.precipType.toUpperCase();
+	} else {
+		precipType = "PRECIPITATION";
+	}
+		precipPossible.innerHTML = "Chance of " + precipType + ": " + (Math.round(object.currently.precipProbability * 100)) + "%";
+
 	if (object.currently.precipProbability > .4) {
 		precipType.style.visibility = "visible"
 	}
