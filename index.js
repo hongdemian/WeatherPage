@@ -25,7 +25,7 @@ let precipType;
 let weekForecast;
 
 
-let showResults = function() {
+let showResults = function () {
 	humidity = document.getElementById("current-humidity");
 	weatherIcon = document.getElementById("current-icon");
 	pressure = document.getElementById("current-pressure");
@@ -69,7 +69,7 @@ function timeToStandard(time) {
 }
 
 function celsiusToFarenheit(k) {
-	return Math.round(k * 9/5) + 32;
+	return Math.round(k * 9 / 5) + 32;
 }
 
 function humidityPercentage(h) {
@@ -77,8 +77,8 @@ function humidityPercentage(h) {
 }
 
 function degreesToDirection(degrees) {
-	var range = 360/16;
-	var low = 360 - range/2;
+	var range = 360 / 16;
+	var low = 360 - range / 2;
 	var high = (low + range) % 360;
 	var angles = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
 	if (!degrees) {
@@ -86,7 +86,7 @@ function degreesToDirection(degrees) {
 	}
 	for (i in angles) {
 
-		if(degrees>= low && degrees < high)
+		if (degrees >= low && degrees < high)
 			return angles[i];
 
 		low = (low + range) % 360;
@@ -95,7 +95,7 @@ function degreesToDirection(degrees) {
 }
 
 function knotsToKilometres(knot) {
-	return Math.round( knot * 1.852);
+	return Math.round(knot * 1.852);
 }
 
 let weatherImages = {
@@ -141,11 +141,11 @@ let getWeather = function () {
 		lat = position.coords.latitude;
 		long = position.coords.longitude;
 	};*/
-console.log(`Lat: ${lat}, Long: ${long}`);
+	console.log(`Lat: ${lat}, Long: ${long}`);
 	if (false) {
 		navigator.geolocation.getCurrentPosition(showPosition);
 	} else {
-	//	document.getElementById("location").innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
+		//	document.getElementById("location").innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
 	}
 	showWeather(lat, long);
 };
@@ -156,6 +156,11 @@ function showWeather(lat, long) {
 	script.type = "text/javascript";
 	script.src = url;
 	document.getElementsByTagName("head")[0].appendChild(script);
+    let url2 = `http://api.wunderground.com/api/16826fdab5598c54/forecast/forecast10day/hourly/astronomy/alerts/geolookup/conditions/q/pws:IABCALGA34.json?callback=displayWeatherWU`;
+    let script2 = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = url2;
+    document.getElementsByTagName("head")[0].appendChild(script2);
 	displayWeather(object)
 }
 
@@ -195,7 +200,7 @@ function displayWeather(object) {
 	if (object.currently.uvIndex > 5) {
 		document.getElementById("current-uvIndex").style.color = "red";
 	} else {
-		if (object.currently.uvIndex < 6 && object.currently.uvIndex > 3 ) {
+		if (object.currently.uvIndex < 6 && object.currently.uvIndex > 3) {
 			document.getElementById("current-uvIndex").style.color = "dark-green";
 		}
 	}
@@ -211,7 +216,7 @@ function displayWeather(object) {
 	}
 
 	<!---forecast section -->
-    console.log(object.currently.summary);
+	console.log(object.currently.summary);
 	windGustForecast.innerHTML = "Wind Peak: </br>" + knotsToKilometres(object.daily.data[0].windGust) + " km/h at: " + timeConvertShort(gustWindTime) + "</br>";
 	console.log("Storm: " + object.currently.nearestStormDistance);
 	console.log("alerts: " + object.alerts);
@@ -229,19 +234,19 @@ let forecastBuild = (object) => {
 
 };
 
-let timeConvert = function(d) {
-	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+let timeConvert = function (d) {
+	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
 		d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
 };
-let timeConvertShort = function(d) {
-	return datestring =  ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+let timeConvertShort = function (d) {
+	return datestring = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
 };
-window.onload = function() {
+window.onload = function () {
 	showResults();
 	getWeather();
 	alert("getWeather!")
 };
 
 let alertInEffect = () => {
-	window.alert("Weather Alert In Effect!</br>" + alertTitle + " Issued at: " + timeConvertShort(alertsTimeIssued)+ ".</br>" + "Expires at: " + timeConvertShort(alertsExpires) + ". </br>" + alertsSummary);
+	window.alert("Weather Alert In Effect!</br>" + alertTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".</br>" + "Expires at: " + timeConvertShort(alertsExpires) + ". </br>" + alertsSummary);
 };
