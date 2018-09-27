@@ -132,19 +132,22 @@ footer p {
 }
 
 @media all and (max-device-width: 400px) {
+    * {
+        width: 100%;
+    }
 
     .weather-container, .header-container .forecast-container {
         /* On small screens, we are no longer using row direction but column */
         flex-direction: column;
         flex-wrap: wrap;
-        align-items: flex-start;
+        align-items: center;
         justify-content: flex-start;
-        flex: 1 100%;
     }
 
-    footer
+    footer,
     footer p {
         text-align: center;
+        width: 90%;
     }
 
 }

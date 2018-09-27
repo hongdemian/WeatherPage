@@ -10,7 +10,6 @@ let weatherSummary;
 let alertsTitle;
 let summary;
 let forecastValidTime;
-let object;
 let alertsUrl;
 let alertsExpires;
 let alertsTimeIssued;
@@ -23,6 +22,15 @@ let feelsLike;
 let precipPossible;
 let precipType;
 let weekForecast;
+let weather = [];
+let WUCurrentConditions = [];
+let WUHourlyForecast = [];
+let WUMoonPhase = [];
+let WUSunPhase = [];
+let WUDailyForecast = [];
+let WUDailyForecastSum = [];
+let WUDailyForecastTime = "";
+let WUAlert = [];
 
 
 let showResults = function () {
@@ -45,7 +53,6 @@ let showResults = function () {
 	precipType = document.getElementById("current-precip-type");
 	weekForecast = document.getElementById("week-forecast");
 };
-
 /*function timeToStandard(time) {
 	console.log(time);
 	let forecastTime = new Date(time * 1000);
@@ -53,7 +60,6 @@ let showResults = function () {
 	let forecastMinutes = forecastTime.getMinutes();
 	return (forecastHours + ":" + forecastMinutes);
 }*/
-
 function timeToStandard(time) {
 // Create a new JavaScript Date object based on the timestamp
 // multiplied by 1000 so that the argument is in milliseconds, not seconds.
@@ -67,15 +73,12 @@ function timeToStandard(time) {
 // Will display time in 10:30:23 format
 	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
-
 function celsiusToFarenheit(k) {
 	return Math.round(k * 9 / 5) + 32;
 }
-
 function humidityPercentage(h) {
 	return Math.round(h * 100);
 }
-
 function degreesToDirection(degrees) {
 	var range = 360 / 16;
 	var low = 360 - range / 2;
@@ -93,11 +96,9 @@ function degreesToDirection(degrees) {
 		high = (high + range) % 360;
 	}
 }
-
 function knotsToKilometres(knot) {
 	return Math.round(knot * 1.852);
 }
-
 let weatherImages = {
 	"clear-day": "./icons/sun.svg",
 	"clear-night": "./icons/Moon.svg",
@@ -113,7 +114,6 @@ let weatherImages = {
 	"thunderstorm": "./icons/Cloud-Lightning.svg",
 	"tornado": "./icons/Tornado.svg"
 };
-
 /*let weatherIcons = {
 	"clear-day": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Sun_icon.svg/252px-Sun_icon.svg.png",
 	"clear-night": "http://www.clker.com/cliparts/f/S/2/p/7/u/gold-matte-moon.svg",
@@ -129,7 +129,6 @@ let weatherImages = {
 	"thunderstorm": "http://findicons.com/files/icons/2613/android_weather_extended/480/thunderstorms.png",
 	"tornado": "http://hddfhm.com/images/clipart-of-a-tornado-11.png"
 };*/
-
 let getWeather = function () {
 	let lat = 0;
 	let long = 0;
@@ -151,37 +150,48 @@ let getWeather = function () {
 };
 
 function showWeather(lat, long) {
-	let url = `https://api.darksky.net/forecast/459d95a8fbfada306d82991efda5b383/${lat},${long}` + `?format=jsonp&callback=displayWeather&units=si`;
+	let url = `http://api.wunderground.com/api/16826fdab5598c54/forecast/forecast10day/hourly/astronomy/alerts/conditions/q/pws:IABCALGA34.json?callback=displayWeatherWU`;
 	let script = document.createElement("script");
 	script.type = "text/javascript";
 	script.src = url;
 	document.getElementsByTagName("head")[0].appendChild(script);
-    let url2 = `http://api.wunderground.com/api/16826fdab5598c54/forecast/forecast10day/hourly/astronomy/alerts/geolookup/conditions/q/pws:IABCALGA34.json?callback=displayWeatherWU`;
-    let script2 = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = url2;
-    document.getElementsByTagName("head")[0].appendChild(script2);
-	displayWeather(object)
+	url = `https://api.darksky.net/forecast/459d95a8fbfada306d82991efda5b383/${lat},${long}` + `?format=jsonp&callback=displayWeather&units=si`;
+	script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src = url;
+	document.getElementsByTagName("head")[0].appendChild(script);
+	//displayWeather(object)
+}
+function displayWeatherWU(object) {
+	weather = object;
+	weatherIcon.src = weather.current_observation.icon_url;
+	WUCurrentConditions = object.current_observation;
+	WUHourlyForecast = object.hourly_forecast;
+	WUMoonPhase = object.moon_phase;
+	WUSunPhase = object.sun_phase;
+	WUDailyForecast = object.forecast.simpleforecast.forecastday;
+	WUDailyForecastSum = object.forecast.txt_forecast.forecastday;
+	WUDailyForecastTime = object.forecast.txt_forecast.date;
+	WUAlert = object.alert;
+	console.log(`Current Conditions: ${WUCurrentConditions}`)
 }
 
 function displayWeather(object) {
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
-	weatherIcon.src = weatherImages[object.currently.icon];
+	console.log(weather);
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
 	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
 	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature, 1) + " C";
-	//console.log(object.currently.precipType);
 	if (object.currently.precipType != undefined) {
 		console.log('true');
 		precipType = object.currently.precipType.toUpperCase();
 	} else {
-		precipType = "PRECIPITATION";
+		precipType = "Precipitation";
 	}
-		precipPossible.innerHTML = "Chance of " + precipType + ": " + (Math.round(object.currently.precipProbability * 100)) + "%";
-
-	if (object.currently.precipProbability > .4) {
-		precipType.style.visibility = "visible"
-	}
+	precipPossible.innerHTML = "Chance of " + precipType + ": " + (Math.round(object.currently.precipProbability * 100)) + "%";
+	 if (object.currently.precipProbability > .4) {
+	 	document.getElementById('precipType').style.visibility = "visible"
+	 }
 	windBearing.innerHTML = "Wind Direction: " + degreesToDirection(object.currently.windBearing);
 	windSpeed.innerHTML = "Wind Speed: " + knotsToKilometres(object.currently.windSpeed) + " km/h";
 	windGust.innerHTML = "Wind Gusts: " + knotsToKilometres(object.currently.windGust) + " km/h";
@@ -216,7 +226,7 @@ function displayWeather(object) {
 	}
 
 	<!---forecast section -->
-	console.log(object.currently.summary);
+	//console.log(object.currently.summary);
 	windGustForecast.innerHTML = "Wind Peak: </br>" + knotsToKilometres(object.daily.data[0].windGust) + " km/h at: " + timeConvertShort(gustWindTime) + "</br>";
 	console.log("Storm: " + object.currently.nearestStormDistance);
 	console.log("alerts: " + object.alerts);
@@ -227,7 +237,7 @@ function displayWeather(object) {
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
-	console.log(JSON.stringify(object));
+	//console.log(JSON.stringify(object));
 }
 
 let forecastBuild = (object) => {
@@ -244,7 +254,6 @@ let timeConvertShort = function (d) {
 window.onload = function () {
 	showResults();
 	getWeather();
-	alert("getWeather!")
 };
 
 let alertInEffect = () => {
