@@ -165,7 +165,7 @@ function displayWeather(object) {
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
 	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
 	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature, 1) + " C";
-	if (object.currently.precipType != undefined) {
+	if (object.currently.precipType !== undefined) {
 		precipType = object.currently.precipType.toUpperCase();
 	} else {
 		precipType = "Precipitation";
@@ -174,26 +174,27 @@ function displayWeather(object) {
 	 if (object.currently.precipProbability > .4) {
 	 	document.getElementById('current-precip-type').style.visibility = "initial";
 	 }
-
-	 if (typeof object.currently.windBearing == "undefined") {
+	 if (typeof object.currently.windBearing === "undefined") {
 	 	windBearing.innerHTML = "Wind Direction: Calm";
 	 } else {
 		 windBearing.innerHTML = "Wind Direction: " + degreesToDirection(object.currently.windBearing);
 	 }
 	windSpeed.innerHTML = "Wind Speed: " + knotsToKilometres(object.currently.windSpeed) + " km/h";
 	windGust.innerHTML = "Wind Gusts: " + knotsToKilometres(object.currently.windGust) + " km/h";
-	if (object.currently.windSpeed >= 30) {
+	if (object.currently.windSpeed >= 20) {
 		windSpeed.addClass("alerts");
 	}
 	if (object.currently.windGust >= 30) {
 		windGust.addClass("alerts");
 	}
 	cloudCover.innerHTML = "Cloud Cover: " + humidityPercentage(object.currently.cloudCover) + "%";
-	weatherSummary.innerHTML = "<span class='summaryTitles'> Current Location:  </span></br>" + object.timezone + "<br/><span class='summaryTitles'> Weather Summary: </span></br>" + object.currently.summary
-		+ "<br/><span class='summaryTitles'>Forecast Summary: </span></br>" + object.hourly.summary;
+	document.getElementById("current-location").innerHTML = object.timezone;
+	document.getElementById("weather-summary").innerHTML =  object.currently.summary;
+	document.getElementById(("weather-forecast-summary")).innerHTML = weather['forecast']['txt_forecast']['forecastday'][0]['fcttext_metric'];
+	document.getElementById("weather-forecast-second").innerHTML = weather['forecast']['txt_forecast']['forecastday'][1]['fcttext_metric'];
 	weekForecast.innerHTML = object.daily.summary;
 	forecastValidTime = new Date(object.currently.time * 1000);
-	gustWindTime = new Date(object.daily.data[0].windGustTime * 1000);
+	let gustWindTime = new Date(object.daily.data[0].windGustTime * 1000);
 	if (object.currently.uvIndex > 5) {
 		document.getElementById("current-uvIndex").style.color = "red";
 	} else {
@@ -201,7 +202,7 @@ function displayWeather(object) {
 			document.getElementById("current-uvIndex").style.color = "dark-green";
 		}
 	}
-	if (object.alerts != undefined) {
+	if (object.alerts !== undefined) {
 		alertsTitle = object.alerts.title;
 		alertsSummary = object.alerts.description;
 		alertsTimeIssued = object.alerts.time;

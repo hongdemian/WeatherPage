@@ -1,3 +1,7 @@
+img, embed, video, object {
+    max-width: 100%;
+}
+
 body {
     /*background: url(https://orig13.deviantart.net/64e8/f/2010/230/0/6/skies_of_blue_by_naturedrop.jpg) no-repeat top center fixed;*/
     /*background-image:url('2017-V2bwequipment-tar.jpg');*/
@@ -101,8 +105,8 @@ a {
     text-align: left;
     color: darkslategrey;
     font-family: 'Fresca', sans-serif;
-    letter-spacing: 0.2px;
-    cursor: default;
+    padding: 1.5em;
+    float: right;
 }
 
 h2 {
@@ -115,20 +119,19 @@ h2 {
 }
 
 footer {
-    height: 2rem;
+    height: 2em;
     background-color: lightskyblue;
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
     color: darkslategray;
-    font-size: 1.5rem;
-    max-width: 100%;
-    padding-bottom: 28px;
+    font-size: 1em;
+    width: 100%;
 }
 
 footer p {
     display: inline-block;
-    float: right;
     padding-right: 40px;
+
 }
 
 @media all and (max-device-width: 400px) {
@@ -140,11 +143,6 @@ footer p {
         flex-wrap: wrap;
         align-items: center;
         justify-content: flex-start;
-    }
-
-    footer,
-    footer p {
-        text-align: center;
     }
 
 }

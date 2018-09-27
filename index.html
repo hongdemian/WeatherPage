@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Weather Alerts and Forecast</title>
     <link rel="stylesheet" href="styles.css">
-    <meta name=”viewport” content=”initial-scale=1, width=device-width, height=device-height, viewport-fit=cover”>
+    <meta name=”viewport” content=”initial-scale=1, width=device-width”>
     <script src="index.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head>
@@ -23,30 +23,41 @@
     <div id="current-weather-details" class="card">
         <h2>Current Conditions:</h2>
         <ul>
-            <li><a id="current-humidity">--</a></li>
-            <li><a id="current-uvIndex">--</a></li>
-            <li><a id="current-temperature-feels">--</a></li>
-            <li><a id="current-cloud-cover">--</a></li>
-            <li><a id="current-precip-possible"> -- </a></li>
-            <li><a id="current-precip-type"></a></li>
+            <li><p id="current-humidity">--</p></li>
+            <li><p id="current-uvIndex">--</p></li>
+            <li><p id="current-temperature-feels">--</a></li>
+            <li><p id="current-cloud-cover">--</p></li>
+            <li><p id="current-precip-possible"> -- </p></li>
+            <li><p id="current-precip-type"></p></li>
         </ul>
     </div>
     <div id="wind" class="card">
         <h2>Wind Conditions:</h2>
         <ul>
-            <li><a id="current-wind-speed">--</a></li>
-            <li><a id="current-wind-gust">--</a></li>
-            <li><a id="current-wind-bearing">--</a></li>
+            <li><p id="current-wind-speed">--</p></li>
+            <li><p id="current-wind-gust">--</p></li>
+            <li><p id="current-wind-bearing">--</p></li>
         </ul>
     </div>
-    <div id="weather-summary" class="card">
-        <a id="weatherSummary"></a>
+    <div class="card">
+        <h2>Weather Summary:</h2>
+        <ul>
+            <li><p class="category">Current Location:</p></li>
+            <li><p id="current-location">--</p></li>
+            <li><p class="category">Weather Summary:</p></li>
+            <li><p id="weather-summary">--</p></li>
+            <li><p class="category">Forecast Summary:</p></li>
+            <li><p id="weather-forecast-summary">--</p></li>
+            <li><p class="category">Extended Summary:</p></li>
+            <li><p id="weather-forecast-second">--</p></li>
+        </ul>
+        <p id="weatherSummary"></p>
     </div>
     <div class="card">
         <h2>Weather Forecast:</h2>
         <ul>
-            <li><a id="wind-gust-forecast">--</a></li>
-            <li><a id="week-forecast">--</a></li>
+            <li><p id="wind-gust-forecast">--</p></li>
+            <li><p id="week-forecast">--</p></li>
         </ul>
     </div>
 </div>
