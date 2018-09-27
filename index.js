@@ -173,12 +173,11 @@ function displayWeatherWU(object) {
 	WUDailyForecastSum = object.forecast.txt_forecast.forecastday;
 	WUDailyForecastTime = object.forecast.txt_forecast.date;
 	WUAlert = object.alert;
-	console.log(`Current Conditions: ${WUCurrentConditions}`)
 }
 
 function displayWeather(object) {
+	console.log(`Current Conditions: ${WUCurrentConditions}`);
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
-	console.log(weather);
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
 	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
 	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature, 1) + " C";
@@ -190,9 +189,14 @@ function displayWeather(object) {
 	}
 	precipPossible.innerHTML = "Chance of " + precipType + ": " + (Math.round(object.currently.precipProbability * 100)) + "%";
 	 if (object.currently.precipProbability > .4) {
-	 	document.getElementById('precipType').style.visibility = "visible"
+	 	document.getElementById('current-precip-type').style.visibility = "initial";
 	 }
-	windBearing.innerHTML = "Wind Direction: " + degreesToDirection(object.currently.windBearing);
+
+	 if (object.currently.windBearing == undefined) {
+	 	windBearing.innerHTML = "Wind Direction: Calm";
+	 } else {
+		 windBearing.innerHTML = "Wind Direction: " + degreesToDirection(object.currently.windBearing);
+	 }
 	windSpeed.innerHTML = "Wind Speed: " + knotsToKilometres(object.currently.windSpeed) + " km/h";
 	windGust.innerHTML = "Wind Gusts: " + knotsToKilometres(object.currently.windGust) + " km/h";
 	if (object.currently.windSpeed >= 30) {
@@ -224,9 +228,7 @@ function displayWeather(object) {
 	} else {
 		alertsTitle = "";
 	}
-
 	<!---forecast section -->
-	//console.log(object.currently.summary);
 	windGustForecast.innerHTML = "Wind Peak: </br>" + knotsToKilometres(object.daily.data[0].windGust) + " km/h at: " + timeConvertShort(gustWindTime) + "</br>";
 	console.log("Storm: " + object.currently.nearestStormDistance);
 	console.log("alerts: " + object.alerts);
@@ -237,13 +239,7 @@ function displayWeather(object) {
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
-	//console.log(JSON.stringify(object));
 }
-
-let forecastBuild = (object) => {
-
-};
-
 let timeConvert = function (d) {
 	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
 		d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
