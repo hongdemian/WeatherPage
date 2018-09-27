@@ -121,7 +121,7 @@ footer {
     bottom: 0px;
     color: darkslategray;
     font-size: 1.5rem;
-    width: 100%;
+    max-width: 100%;
     padding-bottom: 28px;
 }
 
@@ -132,9 +132,7 @@ footer p {
 }
 
 @media all and (max-device-width: 400px) {
-    * {
-        max-width: 300px;
-    }
+
 
     .weather-container, .header-container .forecast-container {
         /* On small screens, we are no longer using row direction but column */
@@ -147,7 +145,6 @@ footer p {
     footer,
     footer p {
         text-align: center;
-        width: 90%;
     }
 
 }
