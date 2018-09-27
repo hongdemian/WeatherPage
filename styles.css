@@ -133,7 +133,7 @@ footer p {
 
 @media all and (max-device-width: 400px) {
     * {
-        width: 100%;
+        max-width: 300px;
     }
 
     .weather-container, .header-container .forecast-container {

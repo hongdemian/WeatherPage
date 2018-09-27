@@ -31,7 +31,8 @@ let WUDailyForecast = [];
 let WUDailyForecastSum = [];
 let WUDailyForecastTime = "";
 let WUAlert = [];
-
+let lat = 0;
+let long = 0;
 
 let showResults = function () {
 	humidity = document.getElementById("current-humidity");
@@ -53,13 +54,6 @@ let showResults = function () {
 	precipType = document.getElementById("current-precip-type");
 	weekForecast = document.getElementById("week-forecast");
 };
-/*function timeToStandard(time) {
-	console.log(time);
-	let forecastTime = new Date(time * 1000);
-	let forecastHours = forecastTime.getHours();
-	let forecastMinutes = forecastTime.getMinutes();
-	return (forecastHours + ":" + forecastMinutes);
-}*/
 function timeToStandard(time) {
 // Create a new JavaScript Date object based on the timestamp
 // multiplied by 1000 so that the argument is in milliseconds, not seconds.
@@ -130,42 +124,26 @@ let weatherImages = {
 	"tornado": "http://hddfhm.com/images/clipart-of-a-tornado-11.png"
 };*/
 let getWeather = function () {
-	let lat = 0;
-	let long = 0;
 	lat = 51.0253;
 	long = -114.0499;
-	//document.getElementById("location").style.visibility = "visible";
-	alertScr = "";
-	/*let showPosition = position => {
-		lat = position.coords.latitude;
-		long = position.coords.longitude;
-	};*/
 	console.log(`Lat: ${lat}, Long: ${long}`);
 	if (false) {
 		navigator.geolocation.getCurrentPosition(showPosition);
-	} else {
-		//	document.getElementById("location").innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
 	}
-	showWeather(lat, long);
-};
+	//	document.getElementById("location").innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
 
-function showWeather(lat, long) {
 	let url = `http://api.wunderground.com/api/16826fdab5598c54/forecast/forecast10day/hourly/astronomy/alerts/conditions/q/pws:IABCALGA34.json?callback=displayWeatherWU`;
 	let script = document.createElement("script");
 	script.type = "text/javascript";
 	script.src = url;
 	document.getElementsByTagName("head")[0].appendChild(script);
-	url = `https://api.darksky.net/forecast/459d95a8fbfada306d82991efda5b383/${lat},${long}` + `?format=jsonp&callback=displayWeather&units=si`;
-	script = document.createElement("script");
-	script.type = "text/javascript";
-	script.src = url;
-	document.getElementsByTagName("head")[0].appendChild(script);
-	//displayWeather(object)
-}
+};
+
 function displayWeatherWU(object) {
 	weather = object;
 	weatherIcon.src = weather.current_observation.icon_url;
 	WUCurrentConditions = object.current_observation;
+	WUForecast = object.forecast;
 	WUHourlyForecast = object.hourly_forecast;
 	WUMoonPhase = object.moon_phase;
 	WUSunPhase = object.sun_phase;
@@ -173,26 +151,31 @@ function displayWeatherWU(object) {
 	WUDailyForecastSum = object.forecast.txt_forecast.forecastday;
 	WUDailyForecastTime = object.forecast.txt_forecast.date;
 	WUAlert = object.alert;
+	url = `https://api.darksky.net/forecast/459d95a8fbfada306d82991efda5b383/${lat},${long}` + `?format=jsonp&callback=displayWeather&units=si`;
+	script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src = url;
+	document.getElementsByTagName("head")[0].appendChild(script);
 }
 
 function displayWeather(object) {
-	console.log(`Current Conditions: ${WUCurrentConditions}`);
+	console.log(`Forecast last updated: ${WUDailyForecastTime}`);
+	console.log("Weather Underground: " + weather);
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
 	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
 	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature, 1) + " C";
 	if (object.currently.precipType != undefined) {
-		console.log('true');
 		precipType = object.currently.precipType.toUpperCase();
 	} else {
 		precipType = "Precipitation";
 	}
-	precipPossible.innerHTML = "Chance of " + precipType + ": " + (Math.round(object.currently.precipProbability * 100)) + "%";
+	precipPossible.innerHTML = "Chance of " + precipType + ": " + ((WUForecast["simpleforecast"]['forecastday'][0]['pop'])) + "%";
 	 if (object.currently.precipProbability > .4) {
 	 	document.getElementById('current-precip-type').style.visibility = "initial";
 	 }
 
-	 if (object.currently.windBearing == undefined) {
+	 if (typeof object.currently.windBearing == "undefined") {
 	 	windBearing.innerHTML = "Wind Direction: Calm";
 	 } else {
 		 windBearing.innerHTML = "Wind Direction: " + degreesToDirection(object.currently.windBearing);
@@ -239,6 +222,10 @@ function displayWeather(object) {
 	}
 	summary = document.getElementById("summary");
 	document.getElementById("alerts").style.visibility = "visible";
+
+	document.getElementById("weatherunderground-about").innerHTML = weather.current_observation.image.title;
+	document.getElementById("weatherunderground-about").setAttribute("href", weather.current_observation.image.link);
+
 }
 let timeConvert = function (d) {
 	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
@@ -255,3 +242,4 @@ window.onload = function () {
 let alertInEffect = () => {
 	window.alert("Weather Alert In Effect!</br>" + alertTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".</br>" + "Expires at: " + timeConvertShort(alertsExpires) + ". </br>" + alertsSummary);
 };
+
