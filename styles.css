@@ -64,6 +64,8 @@ h2, .summaryTitles {
 
 .alerts {
     text-emphasis: orangered;
+    font-weight: bolder;
+    background-color: slategrey;
 }
 
 .weather-container {

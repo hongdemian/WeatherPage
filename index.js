@@ -240,7 +240,8 @@ window.onload = function () {
 
 let alertInEffect = () => {
 	window.alert("Weather Alert In Effect!\n" + alertsTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".\n" + "Expires at: " + timeConvertShort(alertsExpires) + ".\n" + alertsSummary);
-	alerts.innerHTML = "Weather Alert in Effect! " + alertsSeverity.toUpperCase() +  "! Issued at: " + timeConvertShort(alertsTimeIssued) + ", " + alertsTitle.toUpperCase() + "! Expires: " + timeConvertShort(alertsExpires);
+	alerts.innerHTML =  alertsSeverity.toUpperCase() +  "! Issued at: " + timeConvertShort(alertsTimeIssued) + ", " + alertsTitle.toUpperCase() + "!";
 	document.getElementById("alerts").style.visibility = "visible";
+	document.getElementById('alerts').classList.add('alerts');
 };
 
