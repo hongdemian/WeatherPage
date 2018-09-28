@@ -160,7 +160,6 @@ function displayWeatherWU(object) {
 
 function displayWeather(object) {
 	console.log(`Forecast last updated: ${WUDailyForecastTime}`);
-	console.log("Weather Underground: " + weather);
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
 	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
@@ -202,12 +201,14 @@ function displayWeather(object) {
 			document.getElementById("current-uvIndex").style.color = "dark-green";
 		}
 	}
+	console.log(object.alerts);
 	if (object.alerts !== undefined) {
-		alertsTitle = object.alerts.title;
-		alertsSummary = object.alerts.description;
-		alertsTimeIssued = object.alerts.time;
-		alertsExpires = object.alerts.expires;
-		alertsUrl = object.alerts.uri;
+		alertsTitle = object.alerts[0].title;
+		alertsSummary = object.alerts[1].description;
+		alertsTimeIssued = new Date(object.alerts[0].time* 1000);
+		alertsSeverity = object.alerts[0].severity;
+		alertsExpires = new Date(object.alerts[0].expires * 1000);
+		alertsUrl = object.alerts[0].uri;
 		alertInEffect();
 	} else {
 		alertsTitle = "";
@@ -215,14 +216,11 @@ function displayWeather(object) {
 	<!---forecast section -->
 	windGustForecast.innerHTML = "Wind Peak: </br>" + knotsToKilometres(object.daily.data[0].windGust) + " km/h at: " + timeConvertShort(gustWindTime) + "</br>";
 	console.log("Storm: " + object.currently.nearestStormDistance);
-	console.log("alerts: " + object.alerts);
-	if (alertsTitle) {
-		alertsTitle = (object.alert.summary);
-	} else {
+	if (!alertsTitle) {
 		alerts.innerHTML = "No Alerts as of " + timeConvertShort(forecastValidTime);
 	}
 	summary = document.getElementById("summary");
-	document.getElementById("alerts").style.visibility = "visible";
+
 
 	document.getElementById("weatherunderground-about").innerHTML = weather.current_observation.image.title;
 	document.getElementById("weatherunderground-about").setAttribute("href", weather.current_observation.image.link);
@@ -241,6 +239,8 @@ window.onload = function () {
 };
 
 let alertInEffect = () => {
-	window.alert("Weather Alert In Effect!</br>" + alertTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".</br>" + "Expires at: " + timeConvertShort(alertsExpires) + ". </br>" + alertsSummary);
+	window.alert("Weather Alert In Effect!\n" + alertsTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".\n" + "Expires at: " + timeConvertShort(alertsExpires) + ".\n" + alertsSummary);
+	alerts.innerHTML = "Weather Alert in Effect! " + alertsSeverity.toUpperCase() +  "! Issued at: " + timeConvertShort(alertsTimeIssued) + ", " + alertsTitle.toUpperCase() + "! Expires: " + timeConvertShort(alertsExpires);
+	document.getElementById("alerts").style.visibility = "visible";
 };
 

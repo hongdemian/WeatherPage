@@ -1,14 +1,10 @@
-img, embed, video, object {
-    max-width: 100%;
-}
 
 body {
-    /*background: url(https://orig13.deviantart.net/64e8/f/2010/230/0/6/skies_of_blue_by_naturedrop.jpg) no-repeat top center fixed;*/
     /*background-image:url('2017-V2bwequipment-tar.jpg');*/
-    background-size: cover;
+    /*background-size: cover;*/
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: auto;
     width: 100%;
     color: darkslategrey;
 }
@@ -28,10 +24,6 @@ body {
     width: 90px;
     height: auto;
     padding: 10px;
-}
-
-#current-icon {
-    display: inline-block;
 }
 
 #current-temperature {
@@ -77,9 +69,8 @@ h2, .summaryTitles {
 .weather-container {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    height: auto;
+    justify-content: space-around;
+    align-items: stretch;
 }
 
 .card {
@@ -109,11 +100,6 @@ a {
     float: right;
 }
 
-h2 {
-    text-align: center;
-    font-size: 1.4rem;
-}
-
 #current-precip-type {
     visibility: hidden;
 }
@@ -128,21 +114,24 @@ footer {
     width: 100%;
 }
 
-footer p {
-    display: inline-block;
+footer p, p a {
     padding-right: 40px;
-
+    padding-top: 4px;
+    color: black;
+    height: 1.5rem;
+    float: right;
+    margin: auto;
 }
 
 @media all and (max-device-width: 400px) {
 
-
     .weather-container, .header-container .forecast-container {
         /* On small screens, we are no longer using row direction but column */
+        display: flex;
+        width: 100%;
         flex-direction: column;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: flex-start;
+        align-content: space-between;
     }
 
 }
