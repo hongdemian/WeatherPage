@@ -2,6 +2,7 @@
 body {
     /*background-image:url('2017-V2bwequipment-tar.jpg');*/
     /*background-size: cover;*/
+    background-color: aliceblue;
     margin: 0;
     padding: 0;
     height: auto;
@@ -10,6 +11,7 @@ body {
 }
 
 .header-container {
+    width: 100%;
     margin: 5px 10px;
     display: flex;
     align-items: center;
@@ -24,6 +26,7 @@ body {
     width: 90px;
     height: auto;
     padding: 10px;
+    border: solid 1px black;
 }
 
 #current-temperature {
@@ -63,12 +66,16 @@ h2, .summaryTitles {
 }
 
 .alerts {
-    text-emphasis: orangered;
+    text-emphasis: maroon;
     font-weight: bolder;
-    background-color: slategrey;
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px darkred;
 }
 
 .weather-container {
+    width: 100%;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-around;
@@ -77,7 +84,7 @@ h2, .summaryTitles {
 
 .card {
     margin: 20px auto;
-    max-width: 33%;
+    width: 100%;
     padding: 10px 15px;
     flex-basis: auto max-content;
     text-align: center;

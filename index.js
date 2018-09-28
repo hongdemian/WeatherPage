@@ -8,7 +8,6 @@ let windBearing;
 let windSpeed;
 let weatherSummary;
 let alertsTitle;
-let summary;
 let forecastValidTime;
 let alertsUrl;
 let alertsExpires;
@@ -218,10 +217,8 @@ function displayWeather(object) {
 	console.log("Storm: " + object.currently.nearestStormDistance);
 	if (!alertsTitle) {
 		alerts.innerHTML = "No Alerts as of " + timeConvertShort(forecastValidTime);
+		document.getElementById('alerts').style.display = "none";
 	}
-	summary = document.getElementById("summary");
-
-
 	document.getElementById("weatherunderground-about").innerHTML = weather.current_observation.image.title;
 	document.getElementById("weatherunderground-about").setAttribute("href", weather.current_observation.image.link);
 
