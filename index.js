@@ -58,14 +58,19 @@ function timeToStandard(time) {
 // Create a new JavaScript Date object based on the timestamp
 // multiplied by 1000 so that the argument is in milliseconds, not seconds.
 // Hours part from the timestamp
-	const hours = forecastValidTime.getHours();
+	const hours = time.getHours();
+	let abr = "AM";
+	if (hours > 12) {
+		hours -= 12;
+		abr = "PM";
+	}
 // Minutes part from the timestamp
-	const minutes = "0" + forecastValidTime.getMinutes();
+	const minutes = "0" + time.getMinutes();
 // Seconds part from the timestamp
-	const seconds = "0" + forecastValidTime.getSeconds();
+	const seconds = "0" + time.getSeconds();
 
 // Will display time in 10:30:23 format
-	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+	return hours + ':' + minutes.substr(-2) + " " + abr;
 }
 function celsiusToFarenheit(k) {
 	return Math.round(k * 9 / 5) + 32;
@@ -108,21 +113,6 @@ let weatherImages = {
 	"thunderstorm": "./icons/Cloud-Lightning.svg",
 	"tornado": "./icons/Tornado.svg"
 };
-/*let weatherIcons = {
-	"clear-day": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Sun_icon.svg/252px-Sun_icon.svg.png",
-	"clear-night": "http://www.clker.com/cliparts/f/S/2/p/7/u/gold-matte-moon.svg",
-	"rain": "https://cdn3.iconfinder.com/data/icons/weather-16/256/Rainy_Day-512.png",
-	"snow": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Nuvola_weather_snow.svg/1000px-Nuvola_weather_snow.svg.png",
-	"sleet": "http://www.clker.com/cliparts/f/6/7/4/1206565674431593790Anonymous_simple_weather_symbols_10.svg.hi.png",
-	"wind": "http://www.haotu.net/up/4233/128/216-wind.png",
-	"fog": "http://www.iconninja.com/files/81/344/943/fog-cloud-hiding-the-sun-weather-interface-symbol-icon.svg",
-	"cloudy": "http://camera.thietbianninh.com/images/icon-2.png",
-	"partly-cloudy-day": "http://meteo.cw/images_www/weather_icons1/weather_icon_03.png",
-	"partly-cloudy-night": "http://icon-park.com/imagefiles/simple_weather_icons_cloudy_night.png",
-	"hail": "http://icons.iconarchive.com/icons/icons8/ios7/256/Weather-Hail-icon.png",
-	"thunderstorm": "http://findicons.com/files/icons/2613/android_weather_extended/480/thunderstorms.png",
-	"tornado": "http://hddfhm.com/images/clipart-of-a-tornado-11.png"
-};*/
 let getWeather = function () {
 	lat = 51.0253;
 	long = -114.0499;
@@ -238,7 +228,7 @@ window.onload = function () {
 
 let alertInEffect = () => {
 	window.alert("Weather Alert In Effect!\n" + alertsTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".\n" + "Expires at: " + timeConvertShort(alertsExpires) + ".\n" + alertsSummary);
-	alerts.innerHTML =  alertsSeverity.toUpperCase() + ", " + alertsTitle.toUpperCase() +  "! Issued at: " + timeConvertShort(alertsTimeIssued) + " Vaild through: " + timeConvertShort(alertsExpires);
+	alerts.innerHTML =  alertsSeverity.toUpperCase() + ", " + alertsTitle.toUpperCase() +  "! Issued at: " + timeToStandard(alertsTimeIssued) + " Vaild through: " + timeToStandard(alertsExpires);
 	alertElement = document.getElementById('alerts');
 	alertElement.style.visibility = "visible";
 	alertElement.classList.add('alerts').setAttribute("href", alertsUrl);

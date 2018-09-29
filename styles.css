@@ -13,18 +13,20 @@ body {
 }
 
 .header-container {
-    width: 100%;
+    width: 20%;
     margin: 5px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
     color: darkslategrey;
 }
 
 .header-detail {
     background-color: skyblue;
     border-radius: 10px;
-    flex-direction: column;
+    align-self: baseline;
+    margin: 20px;
     width: 90px;
     height: auto;
     padding: 10px;
