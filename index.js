@@ -10,6 +10,7 @@ let weatherSummary;
 let alertsTitle;
 let forecastValidTime;
 let alertsUrl;
+let alertElement;
 let alertsExpires;
 let alertsTimeIssued;
 let alertsSummary;
@@ -237,9 +238,9 @@ window.onload = function () {
 
 let alertInEffect = () => {
 	window.alert("Weather Alert In Effect!\n" + alertsTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".\n" + "Expires at: " + timeConvertShort(alertsExpires) + ".\n" + alertsSummary);
-	alerts.innerHTML =  alertsSeverity.toUpperCase() +  "! Issued at: " + timeConvertShort(alertsTimeIssued) + ", " + alertsTitle.toUpperCase() + "!";
-	document.getElementById("alerts").style.visibility = "visible";
-	document.getElementById('alerts').classList.add('alerts');
-	document.getElementById('alerts').setAttribute("href", alertsUrl);
+	alerts.innerHTML =  alertsSeverity.toUpperCase() + ", " + alertsTitle.toUpperCase() +  "! Issued at: " + timeConvertShort(alertsTimeIssued) + " Vaild through: " + timeConvertShort(alertsExpires);
+	alertElement = document.getElementById('alerts');
+	alertElement.style.visibility = "visible";
+	alertElement.classList.add('alerts').setAttribute("href", alertsUrl);
 };
 

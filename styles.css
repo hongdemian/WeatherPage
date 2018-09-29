@@ -64,16 +64,7 @@ h2, .summaryTitles, .category {
     line-height: 1.7rem;
     text-align: center;
     text-decoration: underline;
-    text-underline-style: dash-long;
-}
-
-.alerts {
-    text-emphasis: maroon !important;
-    font-weight: bolder;
-    background-color: lightblue;
-    padding: 10px;
-    border-radius: 10px;
-    border: solid 1px darkred;
+    text-underline-style: single-accounting;
 }
 
 .weather-container {
@@ -101,20 +92,15 @@ ul {
     margin: 0;
     padding: 0;
 }
- #alerts {
-    color: maroon;
+#alerts {
+    color: darkred;
     text-decoration: none;
-
-}
-
-a {
-    font-size: 1.3rem;
-    text-align: left;
-    color: initial;
-    font-style: initial;
-    font-family: 'Fresca', sans-serif;
-    padding: 1.5em;
-    float: right;
+    text-emphasis: maroon !important;
+    font-weight: bolder;
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px darkred;
 }
 
 #current-precip-type {
@@ -129,15 +115,16 @@ footer {
     color: darkslategray;
     font-size: 1em;
     width: 100%;
+
 }
  footer a {
-    padding-right: 40px;
+     z-index: 5;
      text-decoration: none;
-    padding-top: 4px;
-    color: black;
-    height: 1.5rem;
-    float: right;
-    margin: auto;
+     border: solid 1px black;
+     float: right;
+     font-size: 1.3rem;
+     text-align: center;
+     padding: 1.5em;
 }
 
 @media all and (max-device-width: 400px) {
