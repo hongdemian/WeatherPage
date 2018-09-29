@@ -240,5 +240,6 @@ let alertInEffect = () => {
 	alerts.innerHTML =  alertsSeverity.toUpperCase() +  "! Issued at: " + timeConvertShort(alertsTimeIssued) + ", " + alertsTitle.toUpperCase() + "!";
 	document.getElementById("alerts").style.visibility = "visible";
 	document.getElementById('alerts').classList.add('alerts');
+	document.getElementById('alerts').setAttribute("href", alertsUrl);
 };
 

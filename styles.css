@@ -8,6 +8,8 @@ body {
     height: auto;
     width: 100%;
     color: darkslategrey;
+    font-family: Fresca, "Droid Sans", sans-serif;
+    font-size : 1rem;
 }
 
 .header-container {
@@ -54,7 +56,7 @@ body {
     font-size: larger;
 }
 
-h2, .summaryTitles {
+h2, .summaryTitles, .category {
     font-style: normal;
     font-weight: 600;
     font-size: 1.2rem;
@@ -66,7 +68,7 @@ h2, .summaryTitles {
 }
 
 .alerts {
-    text-emphasis: maroon;
+    text-emphasis: maroon !important;
     font-weight: bolder;
     background-color: lightblue;
     padding: 10px;
@@ -99,11 +101,17 @@ ul {
     margin: 0;
     padding: 0;
 }
+ #alerts {
+    color: maroon;
+    text-decoration: none;
+
+}
 
 a {
     font-size: 1.3rem;
     text-align: left;
-    color: darkslategrey;
+    color: initial;
+    font-style: initial;
     font-family: 'Fresca', sans-serif;
     padding: 1.5em;
     float: right;
@@ -122,9 +130,9 @@ footer {
     font-size: 1em;
     width: 100%;
 }
-
-footer p, p a {
+ footer a {
     padding-right: 40px;
+     text-decoration: none;
     padding-top: 4px;
     color: black;
     height: 1.5rem;
@@ -137,10 +145,17 @@ footer p, p a {
     .weather-container, .header-container .forecast-container {
         /* On small screens, we are no longer using row direction but column */
         display: flex;
+        font-size: 2rem;
         width: 100%;
         flex-direction: column;
         flex-wrap: wrap;
         align-content: space-between;
+    }
+
+    .alerts {
+        font-size: 2.5rem;
+        font-weight: bold;
+        width: 90%;
     }
 
 }
