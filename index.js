@@ -99,9 +99,9 @@ function knotsToKilometres(knot) {
 	return Math.round(knot * 1.852);
 }
 let weatherImages = {
-	"clear-day": "./icons/sun.svg",
-	"clear-night": "./icons/Moon.svg",
-	"rain": "./icons/Cloud-Rain.svg",
+	"clear-day": icons/Sun.svg,
+	"clear-night": icons/Moon.svg,
+	"rain": icons/Cloud-Rain.svg,
 	"snow": "./icons/Cloud-Snow.svg",
 	"sleet": "./icons/Cloud-Hail-Alt.svg",
 	"wind": "./icons/Wind.svg",
