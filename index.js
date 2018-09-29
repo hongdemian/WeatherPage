@@ -58,7 +58,7 @@ function timeToStandard(time) {
 // Create a new JavaScript Date object based on the timestamp
 // multiplied by 1000 so that the argument is in milliseconds, not seconds.
 // Hours part from the timestamp
-	const hours = time.getHours();
+	let hours = time.getHours();
 	let abr = "AM";
 	if (hours > 12) {
 		hours -= 12;
@@ -117,9 +117,9 @@ let getWeather = function () {
 	lat = 51.0253;
 	long = -114.0499;
 	console.log(`Lat: ${lat}, Long: ${long}`);
-	if (false) {
-		navigator.geolocation.getCurrentPosition(showPosition);
-	}
+	// if (false) {
+	// 	navigator.geolocation.getCurrentPosition(showPosition);
+	// }
 	//	document.getElementById("location").innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
 
 	let url = `http://api.wunderground.com/api/16826fdab5598c54/forecast/forecast10day/hourly/astronomy/alerts/conditions/q/pws:IABCALGA34.json?callback=displayWeatherWU`;
@@ -231,6 +231,6 @@ let alertInEffect = () => {
 	alerts.innerHTML =  alertsSeverity.toUpperCase() + ", " + alertsTitle.toUpperCase() +  "! Issued at: " + timeToStandard(alertsTimeIssued) + " Vaild through: " + timeToStandard(alertsExpires);
 	alertElement = document.getElementById('alerts');
 	alertElement.style.visibility = "visible";
-	alertElement.classList.add('alerts').setAttribute("href", alertsUrl);
+	alertElement.setAttribute("href", alertsUrl);
 };
 
