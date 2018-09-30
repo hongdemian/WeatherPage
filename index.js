@@ -79,10 +79,10 @@ function humidityPercentage(h) {
 	return Math.round(h * 100);
 }
 function degreesToDirection(degrees) {
-	var range = 360 / 16;
-	var low = 360 - range / 2;
-	var high = (low + range) % 360;
-	var angles = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+	let range = 360 / 16;
+	let low = 360 - range / 2;
+	let high = (low + range) % 360;
+	let angles = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
 	if (!degrees) {
 		return "Calm"
 	}
@@ -99,9 +99,9 @@ function knotsToKilometres(knot) {
 	return Math.round(knot * 1.852);
 }
 let weatherImages = {
-	"clear-day": icons/Sun.svg,
-	"clear-night": icons/Moon.svg,
-	"rain": icons/Cloud-Rain.svg,
+	"clear-day": "icons/Sun.svg",
+	"clear-night": "icons/Moon.svg",
+	"rain": "icons/Cloud-Rain.svg",
 	"snow": "./icons/Cloud-Snow.svg",
 	"sleet": "./icons/Cloud-Hail-Alt.svg",
 	"wind": "./icons/Wind.svg",
@@ -152,30 +152,16 @@ function displayWeather(object) {
 	console.log(`Forecast last updated: ${WUDailyForecastTime}`);
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
-	temperature.innerHTML = Math.round(object.currently.temperature) + " C"; //+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
-	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature, 1) + " C";
+	temperature.innerHTML = Math.round(object.currently.temperature) + " C";//+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";
+	feelsLike.innerHTML = "Feels Like: " + Math.round(object.currently.apparentTemperature) + " C";
 	if (object.currently.precipType !== undefined) {
 		precipType = object.currently.precipType.toUpperCase();
 	} else {
 		precipType = "Precipitation";
 	}
 	precipPossible.innerHTML = "Chance of " + precipType + ": " + ((WUForecast["simpleforecast"]['forecastday'][0]['pop'])) + "%";
-	 if (object.currently.precipProbability > .4) {
-	 	document.getElementById('current-precip-type').style.visibility = "initial";
-	 }
-	 if (typeof object.currently.windBearing === "undefined") {
-	 	windBearing.innerHTML = "Wind Direction: Calm";
-	 } else {
-		 windBearing.innerHTML = "Wind Direction: " + degreesToDirection(object.currently.windBearing);
-	 }
 	windSpeed.innerHTML = "Wind Speed: " + knotsToKilometres(object.currently.windSpeed) + " km/h";
 	windGust.innerHTML = "Wind Gusts: " + knotsToKilometres(object.currently.windGust) + " km/h";
-	if (object.currently.windSpeed >= 20) {
-		windSpeed.addClass("alerts");
-	}
-	if (object.currently.windGust >= 30) {
-		windGust.addClass("alerts");
-	}
 	cloudCover.innerHTML = "Cloud Cover: " + humidityPercentage(object.currently.cloudCover) + "%";
 	document.getElementById("current-location").innerHTML = object.timezone;
 	document.getElementById("weather-summary").innerHTML =  object.currently.summary;
@@ -184,14 +170,20 @@ function displayWeather(object) {
 	weekForecast.innerHTML = object.daily.summary;
 	forecastValidTime = new Date(object.currently.time * 1000);
 	let gustWindTime = new Date(object.daily.data[0].windGustTime * 1000);
-	if (object.currently.uvIndex > 5) {
-		document.getElementById("current-uvIndex").style.color = "red";
-	} else {
-		if (object.currently.uvIndex < 6 && object.currently.uvIndex > 3) {
-			document.getElementById("current-uvIndex").style.color = "dark-green";
-		}
-	}
-	console.log(object.alerts);
+	windGustForecast.innerHTML = "Wind Peak: </br>" + knotsToKilometres(object.daily.data[0].windGust) + " km/h at: " + timeToStandard(gustWindTime) + "</br>";
+	console.log("Storm: " + object.currently.nearestStormDistance);
+	document.getElementById("weatherunderground-about").innerHTML = weather.current_observation.image.title;
+	document.getElementById("weatherunderground-about").setAttribute("href", weather.current_observation.image.link);
+    addFormatting(object);
+}
+let timeConvertShort = function (d) {
+	return datestring = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+};
+window.onload = function () {
+	showResults();
+	getWeather();
+};
+let addFormatting = (object) => {
 	if (object.alerts !== undefined) {
 		alertsTitle = object.alerts[0].title;
 		alertsSummary = object.alerts[1].description;
@@ -203,29 +195,32 @@ function displayWeather(object) {
 	} else {
 		alertsTitle = "";
 	}
-	<!---forecast section -->
-	windGustForecast.innerHTML = "Wind Peak: </br>" + knotsToKilometres(object.daily.data[0].windGust) + " km/h at: " + timeConvertShort(gustWindTime) + "</br>";
-	console.log("Storm: " + object.currently.nearestStormDistance);
+	if (object.currently.windSpeed >= 20) {
+		windSpeed.classList.add('alerts');
+	}
+	if (object.currently.windGust >= 30) {
+		windGust.classList.add('alerts');
+	}
+	if (object.currently.uvIndex > 5) {
+		document.getElementById("current-uvIndex").classList.add('alerts');
+	} else {
+		if (object.currently.uvIndex < 6 && object.currently.uvIndex > 3) {
+			document.getElementById("current-uvIndex").style.color = "dark-green";
+		}
+	}
+	if (object.currently.precipProbability > .7) {
+		document.getElementById('current-precip-type').classList.add('alerts');
+	}
+	if (typeof object.currently.windBearing === "undefined") {
+		windBearing.innerHTML = "Wind Direction: Calm";
+	} else {
+		windBearing.innerHTML = "Wind Direction: " + degreesToDirection(object.currently.windBearing);
+	}
 	if (!alertsTitle) {
 		alerts.innerHTML = "No Alerts as of " + timeConvertShort(forecastValidTime);
 		document.getElementById('alerts').style.display = "none";
 	}
-	document.getElementById("weatherunderground-about").innerHTML = weather.current_observation.image.title;
-	document.getElementById("weatherunderground-about").setAttribute("href", weather.current_observation.image.link);
-
-}
-let timeConvert = function (d) {
-	return datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
-		d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
 };
-let timeConvertShort = function (d) {
-	return datestring = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-};
-window.onload = function () {
-	showResults();
-	getWeather();
-};
-
 let alertInEffect = () => {
 	window.alert("Weather Alert In Effect!\n" + alertsTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".\n" + "Expires at: " + timeConvertShort(alertsExpires) + ".\n" + alertsSummary);
 	alerts.innerHTML =  alertsSeverity.toUpperCase() + ", " + alertsTitle.toUpperCase() +  "! Issued at: " + timeToStandard(alertsTimeIssued) + " Vaild through: " + timeToStandard(alertsExpires);
