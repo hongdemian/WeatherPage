@@ -37,6 +37,9 @@ let statementTitle;
 let statementLevel;
 let statementSummary;
 let statementTime;
+let WUForecast;
+let hourlyConditions = [];
+let dailyConditions = [];
 
 let showResults = function () {
 	humidity = document.getElementById("current-humidity");
@@ -183,6 +186,8 @@ function displayWeather(object) {
 	document.getElementById("weatherunderground-about").innerHTML = weather.current_observation.image.title;
 	document.getElementById("weatherunderground-about").setAttribute("href", weather.current_observation.image.link);
 	addFormatting(object);
+	hourlyForecast();
+	dailyForecast();
 }
 let timeConvertShort = function (d) {
 	return datestring = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
@@ -233,7 +238,7 @@ let alertInEffect = () => {
 	window.alert("Weather Alert In Effect!\n" + alertsTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".\n" + "Expires at: " + timeConvertShort(alertsExpires) + ".\n" + alertsSummary);
 	alerts.innerHTML =  alertsSeverity.toUpperCase() + ", " + alertsTitle.toUpperCase() +  "! Issued at: " + timeToStandard(alertsTimeIssued) + " Vaild through: " + timeToStandard(alertsExpires);
 	alertElement = document.getElementById('alerts');
-	alertElement.style.visibility = "visible";
+	alertElement.style.display = "none";
 	alertElement.setAttribute("href", alertsUrl);
     document.getElementById("weather-statement-card").style.display = "initial";
     statementTitle.innerHTML = alertsTitle;
@@ -241,4 +246,75 @@ let alertInEffect = () => {
     statementSummary.innerHTML = alertsSummary;
     statementTime.innerHTML = "Issued : " + timeToStandard(alertsTimeIssued) + ", Valid until: " + timeToStandard(alertsExpires);
 };
-
+let hourlyForecast = () => {
+	let hourlyTable = document.getElementById("hourly-forecast-table");
+	//console.log(WUHourlyForecast[0].FCTTIME["civil"]);
+	for (index=0; index < WUHourlyForecast.length; index++) {
+		arr = WUHourlyForecast[index];
+		time = arr.FCTTIME["civil"];
+		temp = arr.temp.metric;
+		dewpoint = arr.dewpoint.metric;
+		condition = arr.condition;
+		hourlyWind = arr.wspd.metric;
+		hourlyWindDir = arr['wdir']['dir'];
+		hourlywindchill = arr['windchill']['metric'];
+		if (hourlywindchill == -9999) {hourlywindchill = ""}
+		hourlyFeelsLike = arr['feelslike']['metric'];
+		console.log(hourlyFeelsLike);
+		hourlyPrecip = arr['pop'];
+		hourlySnow = arr.snow.metric;
+		cloud = arr.sky;
+		row = hourlyTable.insertRow();
+		cell1 = row.insertCell(0);
+		cell2 = row.insertCell(1);
+		cell3 = row.insertCell(2);
+		cell4 = row.insertCell(3);
+		cell5 = row.insertCell(4);
+		cell6 = row.insertCell(5);
+		cell7 = row.insertCell(6);
+		cell8 = row.insertCell(7);
+		cell9 = row.insertCell(8);
+		cell10 = row.insertCell(9);
+		cell11 = row.insertCell(10);
+		cell1.innerHTML = time;
+		cell2.innerHTML = temp;
+		cell3.innerHTML = hourlywindchill;
+		cell4.innerHTML = hourlyFeelsLike;
+		cell5.innerHTML = dewpoint;
+		cell6.innerHTML = condition;
+		cell7.innerHTML = cloud;
+		cell8.innerHTML = hourlyWind;
+		cell9.innerHTML = hourlyWindDir;
+		cell10.innerHTML = hourlyPrecip;
+		cell11.innerHTML = hourlySnow;
+	}
+};
+let dailyForecast = () => {
+dailyTable = document.getElementById('daily-forecast-table');
+for (i=0; i < WUDailyForecast.length; i++) {
+	arr = WUDailyForecast[i];
+	console.log(arr);
+	day = arr.date.weekday;
+	hightemp = arr.high.celsius;
+	lowtemp = arr.low.celsius;
+	condition = arr.conditions;
+	dailyPOP = arr['pop'];
+	maxWind = arr.maxwind.kph;
+	maxWindDir = arr.maxwind['dir'];
+	row = dailyTable.insertRow();
+	cell1 = row.insertCell(0);
+	cell2 = row.insertCell(1);
+	cell3 = row.insertCell(2);
+	cell4 = row.insertCell(3);
+	cell5 = row.insertCell(4);
+	cell6 = row.insertCell(5);
+	cell7 = row.insertCell(6);
+	cell1.innerHTML = day;
+	cell2.innerHTML = hightemp;
+	cell3.innerHTML = lowtemp;
+	cell4.innerHTML = condition;
+	cell5.innerHTML = dailyPOP;
+	cell6.innerHTML = maxWind;
+	cell7.innerHTML = maxWindDir;
+}
+};

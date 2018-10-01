@@ -108,6 +108,21 @@ h2, .category {
     opacity: .9;
     border: solid 1px black;
 }
+
+.card-table {
+    margin: 10px auto 50px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: skyblue;
+    opacity: .9;
+    border: solid 1px black;
+    max-height: 330px;
+    overflow: scroll;
+}
+.card-table:last-child{
+    overflow: hidden;
+}
 ul {
     list-style-type: none;
     margin: 0;
@@ -118,6 +133,16 @@ ul {
     visibility: hidden;
 }
 
+.weather-container-table {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    flex-basis: max-content;
+    margin: 0 auto;
+}
+td, tr {
+    margin: 0 10px;
+}
 footer {
     height: 2em;
     background-color: lightskyblue;
@@ -145,13 +170,13 @@ footer a {
 }
     .weather-container, .header-container .forecast-container {
         /* On small screens, we are no longer using row direction but column */
-        display: flex;
         font-size: 2rem;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-between;
         align-content: center;
         align-items: center;
+        flex-basis: 85%;
     }
 
     .alerts {
