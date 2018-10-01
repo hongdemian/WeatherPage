@@ -33,6 +33,10 @@ let WUDailyForecastTime = "";
 let WUAlert = [];
 let lat = 0;
 let long = 0;
+let statementTitle;
+let statementLevel;
+let statementSummary;
+let statementTime;
 
 let showResults = function () {
 	humidity = document.getElementById("current-humidity");
@@ -53,6 +57,10 @@ let showResults = function () {
 	precipPossible = document.getElementById("current-precip-possible");
 	precipType = document.getElementById("current-precip-type");
 	weekForecast = document.getElementById("week-forecast");
+	statementTitle = document.getElementById("weather-statement-title");
+	statementLevel = document.getElementById("weather-statement-level");
+	statementSummary = document.getElementById("weather-statement-summary");
+	statementTime = document.getElementById("weather-statement-time");
 };
 function timeToStandard(time) {
 // Create a new JavaScript Date object based on the timestamp
@@ -227,5 +235,10 @@ let alertInEffect = () => {
 	alertElement = document.getElementById('alerts');
 	alertElement.style.visibility = "visible";
 	alertElement.setAttribute("href", alertsUrl);
+    document.getElementById("weather-statement-card").style.display = "initial";
+    statementTitle.innerHTML = alertsTitle;
+    statementLevel.innerHTML = alertsSeverity.toUpperCase();
+    statementSummary.innerHTML = alertsSummary;
+    statementTime.innerHTML = "Issued : " + timeToStandard(alertsTimeIssued) + ", Valid until: " + timeToStandard(alertsExpires);
 };
 
