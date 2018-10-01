@@ -17,13 +17,12 @@ body {
     margin: 5px auto;
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .header-detail {
     /*background-color: skyblue;*/
     border-radius: 10px;
-    width: 100px;
-    height: auto;
     padding: 10px;
 }
 
@@ -109,9 +108,12 @@ h2, .category {
     background-color: skyblue;
     opacity: .9;
     border: solid 1px black;
-    max-height: 330px;
+    max-height: 350px;
     flex-basis: fit-content;
     overflow: scroll;
+}
+table h2 {
+    margin: 0 auto;
 }
 .card-table:last-child{
     overflow: hidden;
@@ -120,6 +122,9 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+p {
+    margin: 5px 0;
 }
 
 #current-precip-type {

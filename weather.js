@@ -62,6 +62,8 @@ let showResults = function () {
 	statementLevel = document.getElementById("weather-statement-level");
 	statementSummary = document.getElementById("weather-statement-summary");
 	statementTime = document.getElementById("weather-statement-time");
+	precip = document.getElementById("current-precip");
+	precipDay = document.getElementById("current-precip-day");
 };
 function timeToStandard(time) {
 // Create a new JavaScript Date object based on the timestamp
@@ -169,6 +171,8 @@ function displayWeather(object) {
 		precipType = "Precipitation";
 	}
 	precipPossible.innerHTML = "Chance of " + precipType + ": " + ((WUForecast["simpleforecast"]['forecastday'][0]['pop'])) + "%";
+	precip.innerHTML = precipType + " next hour: " + WUCurrentConditions.precip_1hr_metric;
+	precipDay.innerHTML = precipType + " next 24hr: " + WUCurrentConditions.precip_today_metric;
 	windSpeed.innerHTML = "Wind Speed: " + knotsToKilometres(object.currently.windSpeed) + " km/h";
 	windGust.innerHTML = "Wind Gusts: " + knotsToKilometres(object.currently.windGust) + " km/h";
 	cloudCover.innerHTML = "Cloud Cover: " + humidityPercentage(object.currently.cloudCover) + "%";
