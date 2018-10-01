@@ -38,8 +38,6 @@ let statementLevel;
 let statementSummary;
 let statementTime;
 let WUForecast;
-let hourlyConditions = [];
-let dailyConditions = [];
 
 let showResults = function () {
 	humidity = document.getElementById("current-humidity");
@@ -301,6 +299,8 @@ for (i=0; i < WUDailyForecast.length; i++) {
 	dailyPOP = arr['pop'];
 	maxWind = arr.maxwind.kph;
 	maxWindDir = arr.maxwind['dir'];
+	snowDay = arr.snow_day.cm;
+	snowNight = arr.snow_night.cm;
 	row = dailyTable.insertRow();
 	cell1 = row.insertCell(0);
 	cell2 = row.insertCell(1);
@@ -309,6 +309,8 @@ for (i=0; i < WUDailyForecast.length; i++) {
 	cell5 = row.insertCell(4);
 	cell6 = row.insertCell(5);
 	cell7 = row.insertCell(6);
+	cell8 = row.insertCell(7);
+	cell9 = row.insertCell(8);
 	cell1.innerHTML = day;
 	cell2.innerHTML = hightemp;
 	cell3.innerHTML = lowtemp;
@@ -316,5 +318,7 @@ for (i=0; i < WUDailyForecast.length; i++) {
 	cell5.innerHTML = dailyPOP;
 	cell6.innerHTML = maxWind;
 	cell7.innerHTML = maxWindDir;
+	cell8.innerHTML = snowDay;
+	cell9.innerHTML = snowNight;
 }
 };
