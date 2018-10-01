@@ -16,23 +16,15 @@ body {
     width: 20%;
     margin: 5px auto;
     display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
     flex-direction: row;
-    color: darkslategrey;
 }
 
 .header-detail {
-    background-color: skyblue;
+    /*background-color: skyblue;*/
     border-radius: 10px;
-    align-self: baseline;
-    margin: 20px;
-    width: 120px;
-
+    width: 100px;
     height: auto;
     padding: 10px;
-    border: solid 1px black;
 }
 
 #current-temperature {
@@ -90,7 +82,7 @@ h2, .category {
 
 .weather-container {
     width: 90%;
-    margin: 25px auto;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -139,7 +131,7 @@ ul {
     width: 90%;
     justify-content: center;
     flex-basis: max-content;
-    margin: 0 auto;
+    margin: 0 auto 50px;
 }
 td, tr {
     margin: 0 10px;

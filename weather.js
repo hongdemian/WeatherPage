@@ -172,7 +172,7 @@ function displayWeather(object) {
 	windSpeed.innerHTML = "Wind Speed: " + knotsToKilometres(object.currently.windSpeed) + " km/h";
 	windGust.innerHTML = "Wind Gusts: " + knotsToKilometres(object.currently.windGust) + " km/h";
 	cloudCover.innerHTML = "Cloud Cover: " + humidityPercentage(object.currently.cloudCover) + "%";
-	document.getElementById("current-location").innerHTML = object.timezone;
+	//document.getElementById("current-location").innerHTML = object.timezone;
 	document.getElementById("weather-summary").innerHTML =  object.currently.summary;
 	document.getElementById(("weather-forecast-summary")).innerHTML = weather['forecast']['txt_forecast']['forecastday'][0]['fcttext_metric'];
 	document.getElementById("weather-forecast-second").innerHTML = weather['forecast']['txt_forecast']['forecastday'][1]['fcttext_metric'];
@@ -258,7 +258,6 @@ let hourlyForecast = () => {
 		hourlywindchill = arr['windchill']['metric'];
 		if (hourlywindchill == -9999) {hourlywindchill = ""}
 		hourlyFeelsLike = arr['feelslike']['metric'];
-		console.log(hourlyFeelsLike);
 		hourlyPrecip = arr['pop'];
 		hourlySnow = arr.snow.metric;
 		cloud = arr.sky;
@@ -291,7 +290,6 @@ let dailyForecast = () => {
 dailyTable = document.getElementById('daily-forecast-table');
 for (i=0; i < WUDailyForecast.length; i++) {
 	arr = WUDailyForecast[i];
-	console.log(arr);
 	day = arr.date.weekday;
 	hightemp = arr.high.celsius;
 	lowtemp = arr.low.celsius;
