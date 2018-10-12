@@ -237,6 +237,7 @@ let addFormatting = (object) => {
 	}
 };
 let alertInEffect = () => {
+	document.getElementById("alert-icon").style.display = "initial";
 	window.alert("Weather Alert In Effect!\n" + alertsTitle + " Issued at: " + timeConvertShort(alertsTimeIssued) + ".\n" + "Expires at: " + timeConvertShort(alertsExpires) + ".\n" + alertsSummary);
 	alerts.innerHTML =  alertsSeverity.toUpperCase() + ", " + alertsTitle.toUpperCase() +  "! Issued at: " + timeToStandard(alertsTimeIssued) + " Vaild through: " + timeToStandard(alertsExpires);
 	alertElement = document.getElementById('alerts');

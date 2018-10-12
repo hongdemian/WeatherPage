@@ -33,6 +33,10 @@ body {
     color: black;
 }
 
+#alert-icon {
+    display: none;
+}
+
 .special-statements {
     height: auto;
     text-align: center;
