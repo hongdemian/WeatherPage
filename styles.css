@@ -18,6 +18,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    background-color: lightblue;
 }
 
 .header-detail {
@@ -166,19 +167,18 @@ footer a {
 
 @media all and (max-device-width: 400px) {
 .header-container {
-    width: 30%;
+    width: 90%;
     height: auto;
+    margin: 0 auto;
 
 }
     .weather-container, .header-container, .forecast-container, .weather-container-table{
         /* On small screens, we are no longer using row direction but column */
         font-size: 2rem;
         margin: 0 auto;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
-        justify-content: space-between;
-        align-content: center;
-        align-items: center;
+        justify-content: center;
         flex-basis: 85%;
 
     }
