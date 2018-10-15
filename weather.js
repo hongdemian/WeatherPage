@@ -38,6 +38,7 @@ let statementLevel;
 let statementSummary;
 let statementTime;
 let WUForecast;
+let aerisWeatherObject = {};
 
 let showResults = function () {
 	humidity = document.getElementById("current-humidity");
@@ -140,6 +141,53 @@ let getWeather = function () {
 	document.getElementsByTagName("head")[0].appendChild(script);
 };
 
+let aerisWeather = () => {
+	// const apiId = 'V0EhyX4bGWXDkmJunrbk0';
+	// const apiSec = 'Rn1IRr4nYoNgefL7Y5YZQqX2mPEi4iKIAIlGeOTZ';
+	// const reqUrl = 'http://api.aerisapi.com/places/';
+	// const calCOC = 'CLC-072400';
+	// const params = '';
+	// /places/search?query=name:seattle,state:wa
+	//
+	// const req = `${reqUrl}search?query=p:${calCOC}${params}&client_id=${apiId}$client_secret=${apiSec}`;
+	//
+	// const sampleREQ = `https://api.aerisapi.com/forecasts/calgary, ab?&format=json&filter=daynight&limit=7&fields=periods.dateTimeISO,loc,periods.maxTempC,periods.minTempC,periods.pop,periods.precipMM,periods.maxHumidity,periods.minHumidity,periods.maxDewpointC,periods.minDewpointC,periods.maxFeelslikeC,periods.minFeelslikeC,periods.windSpeedMaxKPH,periods.windSpeedMinKPH,periods.windDirMax,periods.weather&client_id=${apiId}&client_secret=${apiSec}`;
+    // script = document.createElement(tagName: "script");
+    // script.type = "text/javascript";
+    // script.src = sampleREQ;
+    // document.getElementsByTagName(qualifiedName: 'head')[0].appendChild(script);
+
+	const url2 = 'https://api.aerisapi.com/observations/calgary, ab?&format=json&filter=mesonet&limit=3&fields=id,ob.dateTimeISO,ob.tempC,ob.dewpointC,ob.humidity,ob.windSpeedKPH,ob.windDir,ob.weather,ob.heatindexC,ob.windchillC,ob.feelslikeC&client_id=V0EhyX4bGWXDkmJunrbk0&client_secret=Rn1IRr4nYoNgefL7Y5YZQqX2mPEi4iKIAIlGeOTZ';
+
+	fetch(url2)
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(json) {
+			if (!json.success) {
+				console.log('Oh no!')
+			} else {
+				console.log("current: " + json)
+			}
+		});
+
+
+	const url = 'https://api.aerisapi.com/forecasts/calgary, ab?&format=json&filter=1hr&limit=18&fields=periods.dateTimeISO,loc,periods.maxTempC,periods.minTempC,periods.pop,periods.precipMM,periods.maxHumidity,periods.minHumidity,periods.maxDewpointC,periods.minDewpointC,periods.maxFeelslikeC,periods.minFeelslikeC,periods.windSpeedMaxKPH,periods.windSpeedMinKPH,periods.windDirMax,periods.weather&client_id=V0EhyX4bGWXDkmJunrbk0&client_secret=Rn1IRr4nYoNgefL7Y5YZQqX2mPEi4iKIAIlGeOTZ';
+
+	fetch(url)
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(json) {
+			if (!json.success) {
+				console.log('Oh no!')
+			} else {
+				console.log("forecast: " + JSON.stringify(json));
+				aerisWeatherObject = json;
+			}
+		});
+};
+
 function displayWeatherWU(object) {
 	weather = object;
 	weatherIcon.src = weather.current_observation.icon_url;
@@ -157,10 +205,12 @@ function displayWeatherWU(object) {
 	script.type = "text/javascript";
 	script.src = url;
 	document.getElementsByTagName("head")[0].appendChild(script);
+	aerisWeather();
 }
 
 function displayWeather(object) {
 	console.log(`Forecast last updated: ${WUDailyForecastTime}`);
+	console.log("Weather Aeris: " + JSON.stringify(aerisWeatherObject));
 	humidity.innerHTML = "Humidity: " + humidityPercentage(object.currently.humidity) + "%";
 	uvIndex.innerHTML = "uvIndex: " + object.currently.uvIndex;
 	temperature.innerHTML = Math.round(object.currently.temperature) + " C";//+ " / " + celsiusToFarenheit(object.currently.temperature) + " F";

@@ -1,8 +1,7 @@
 
 body {
-    /*background-image:url('2017-V2bwequipment-tar.jpg');*/
-    /*background-size: cover;*/
-    background-color: aliceblue;
+    background-image:url('2017-V2bwequipment-tar.jpg');
+    background-size: cover;
     margin: 0;
     padding: 0;
     height: auto;
@@ -19,6 +18,8 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     background-color: lightblue;
+    border-radius: 10px;
+    border: solid 1px black;
 }
 
 .header-detail {
@@ -64,7 +65,7 @@ body {
 }
 #weather-statement-card {
     display: none;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     flex-basis: 100%;
     order: -1;
 }
@@ -166,7 +167,13 @@ footer a {
 }
 
 @media all and (max-device-width: 400px) {
-.header-container {
+
+
+    body{
+        background-image: none;
+        background-color: aliceblue;
+    }
+    .header-container {
     width: 90%;
     height: auto;
     margin: 0 auto;
