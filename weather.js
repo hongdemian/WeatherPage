@@ -134,14 +134,14 @@ let getWeather = function () {
 	// }
 	//	document.getElementById("location").innerHTML = "Geolocation is not supported by this browser." + "<br>Showing results for Calgary!";
 
-	let url = `http://api.wunderground.com/api/16826fdab5598c54/forecast/forecast10day/hourly/astronomy/alerts/conditions/q/pws:IABCALGA34.json?callback=displayWeatherWU`;
+	let url = `http://api.wunderground.com/api/16826fdab5598c54/forecast/forecast10day/hourly/astronomy/alerts/conditions/q/pws:IABCALGA34.json?callback=displayWeatherAeris`;
 	let script = document.createElement("script");
 	script.type = "text/javascript";
 	script.src = url;
 	document.getElementsByTagName("head")[0].appendChild(script);
 };
 
-let aerisWeather = () => {
+let displayWeatherAeris = () => {
 	// const apiId = 'V0EhyX4bGWXDkmJunrbk0';
 	// const apiSec = 'Rn1IRr4nYoNgefL7Y5YZQqX2mPEi4iKIAIlGeOTZ';
 	// const reqUrl = 'http://api.aerisapi.com/places/';
@@ -152,33 +152,35 @@ let aerisWeather = () => {
 	// const req = `${reqUrl}search?query=p:${calCOC}${params}&client_id=${apiId}$client_secret=${apiSec}`;
 	//
 	// const sampleREQ = `https://api.aerisapi.com/forecasts/calgary, ab?&format=json&filter=daynight&limit=7&fields=periods.dateTimeISO,loc,periods.maxTempC,periods.minTempC,periods.pop,periods.precipMM,periods.maxHumidity,periods.minHumidity,periods.maxDewpointC,periods.minDewpointC,periods.maxFeelslikeC,periods.minFeelslikeC,periods.windSpeedMaxKPH,periods.windSpeedMinKPH,periods.windDirMax,periods.weather&client_id=${apiId}&client_secret=${apiSec}`;
-    // script = document.createElement(tagName: "script");
-    // script.type = "text/javascript";
-    // script.src = sampleREQ;
-    // document.getElementsByTagName(qualifiedName: 'head')[0].appendChild(script);
+	// script = document.createElement(tagName: "script");
+	// script.type = "text/javascript";
+	// script.src = sampleREQ;
+	// document.getElementsByTagName(qualifiedName: 'head')[0].appendChild(script);
 
-	const url2 = 'https://api.aerisapi.com/observations/calgary, ab?&format=json&filter=mesonet&limit=3&fields=id,ob.dateTimeISO,ob.tempC,ob.dewpointC,ob.humidity,ob.windSpeedKPH,ob.windDir,ob.weather,ob.heatindexC,ob.windchillC,ob.feelslikeC&client_id=V0EhyX4bGWXDkmJunrbk0&client_secret=Rn1IRr4nYoNgefL7Y5YZQqX2mPEi4iKIAIlGeOTZ';
+	const url2 = 'https://api.aerisapi.com/observations/calgary, ab?&format=json&CALLBACK=displayWeatherAeris2&filter=mesonet&limit=3&fields=id,ob.dateTimeISO,ob.tempC,ob.dewpointC,ob.humidity,ob.windSpeedKPH,ob.windDir,ob.weather,ob.heatindexC,ob.windchillC,ob.feelslikeC&client_id=V0EhyX4bGWXDkmJunrbk0&client_secret=Rn1IRr4nYoNgefL7Y5YZQqX2mPEi4iKIAIlGeOTZ';
 
 	fetch(url2)
-		.then(function(response) {
+		.then(function (response) {
 			return response.json();
 		})
-		.then(function(json) {
+		.then(function (json) {
 			if (!json.success) {
 				console.log('Oh no!')
 			} else {
 				console.log("current: " + json)
 			}
 		});
+};
+let displayWeatherAeris2 = () => {
 
 
-	const url = 'https://api.aerisapi.com/forecasts/calgary, ab?&format=json&filter=1hr&limit=18&fields=periods.dateTimeISO,loc,periods.maxTempC,periods.minTempC,periods.pop,periods.precipMM,periods.maxHumidity,periods.minHumidity,periods.maxDewpointC,periods.minDewpointC,periods.maxFeelslikeC,periods.minFeelslikeC,periods.windSpeedMaxKPH,periods.windSpeedMinKPH,periods.windDirMax,periods.weather&client_id=V0EhyX4bGWXDkmJunrbk0&client_secret=Rn1IRr4nYoNgefL7Y5YZQqX2mPEi4iKIAIlGeOTZ';
+	const url = 'https://api.aerisapi.com/forecasts/calgary, ab?&format=json&CALLBACK=displayWeatherWU&filter=1hr&limit=18&fields=periods.dateTimeISO,loc,periods.maxTempC,periods.minTempC,periods.pop,periods.precipMM,periods.maxHumidity,periods.minHumidity,periods.maxDewpointC,periods.minDewpointC,periods.maxFeelslikeC,periods.minFeelslikeC,periods.windSpeedMaxKPH,periods.windSpeedMinKPH,periods.windDirMax,periods.weather&client_id=V0EhyX4bGWXDkmJunrbk0&client_secret=Rn1IRr4nYoNgefL7Y5YZQqX2mPEi4iKIAIlGeOTZ';
 
 	fetch(url)
-		.then(function(response) {
+		.then(function (response) {
 			return response.json();
 		})
-		.then(function(json) {
+		.then(function (json) {
 			if (!json.success) {
 				console.log('Oh no!')
 			} else {
@@ -205,7 +207,6 @@ function displayWeatherWU(object) {
 	script.type = "text/javascript";
 	script.src = url;
 	document.getElementsByTagName("head")[0].appendChild(script);
-	aerisWeather();
 }
 
 function displayWeather(object) {

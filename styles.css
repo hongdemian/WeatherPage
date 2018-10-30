@@ -2,7 +2,7 @@
 body {
     background-image:url('2017-V2bwequipment-tar.jpg');
     background-size: cover;
-    margin: 0;
+    margin: 30px 0;
     padding: 0;
     height: auto;
     width: 100%;
@@ -165,6 +165,12 @@ footer a {
      float: right;
      text-align: center;
 }
+@media all and (max-device-width: 1000px) {
+    .weather-container-table {
+        width: 90%;
+    }
+}
+
 
 @media all and (max-device-width: 400px) {
 
@@ -177,8 +183,10 @@ footer a {
     width: 90%;
     height: auto;
     margin: 0 auto;
-
 }
+    .card {
+        flex-basis: 45%;
+    }
     .weather-container, .header-container, .forecast-container, .weather-container-table{
         /* On small screens, we are no longer using row direction but column */
         font-size: 2rem;
