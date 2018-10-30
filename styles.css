@@ -177,10 +177,10 @@ footer a {
 
     body{
         background-image: none;
-        background-color: aliceblue;
+        background-color: lightgrey;
     }
     .header-container {
-    width: 90%;
+    width: 33%;
     height: auto;
     margin: 0 auto;
 }
