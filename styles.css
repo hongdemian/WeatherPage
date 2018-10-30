@@ -158,9 +158,6 @@ footer {
     font-size: 1rem;
     width: 100%;
 }
-.footer-item {
-
-}
 footer a {
      margin: 0 20px;
      padding-top: 7px;
@@ -210,5 +207,10 @@ footer a {
 #alerts {
     font-size: 3rem;
     width: 90%;
+}
+footer{
+    flex-direction: row;
+    flex-basis: 45%;
+    justify-content: space-around;
 }
 }
