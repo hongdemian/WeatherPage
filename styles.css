@@ -149,11 +149,16 @@ td, tr {
 }
 footer {
     height: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
     background-color: lightskyblue;
     position: fixed;
     bottom: 0;
     font-size: 1rem;
     width: 100%;
+}
+.footer-item {
 
 }
 footer a {
