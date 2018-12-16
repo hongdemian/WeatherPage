@@ -167,7 +167,7 @@ footer a {
      float: right;
      text-align: center;
 }
-@media all and (max-device-width: 1000px) {
+@media all and (max-device-width: 900px) {
     .weather-container-table {
         width: 90%;
     }
@@ -200,6 +200,7 @@ footer a {
 
     }
 
+
     .alerts {
         font-size: 2.5rem;
         font-weight: bold;
@@ -208,8 +209,8 @@ footer a {
     font-size: 3rem;
     width: 90%;
 }
-footer{
-    flex-direction: row;
+footer {
+    flex-direction: column-reverse;
     flex-basis: 45%;
     justify-content: space-around;
 }
